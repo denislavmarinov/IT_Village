@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2020 at 03:08 PM
+-- Generation Time: Mar 29, 2020 at 02:01 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -46,14 +46,6 @@ CREATE TABLE `music` (
   `music_id` int(11) NOT NULL,
   `music_name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `music`
---
-
-INSERT INTO `music` (`music_id`, `music_name`) VALUES
-(1, 'https://www.youtube.com/watch?v=5FSkEJqO8hA'),
-(2, 'https://www.youtube.com/watch?v=EnflLRtslUQ');
 
 -- --------------------------------------------------------
 
@@ -149,7 +141,7 @@ ALTER TABLE `game_room`
 -- AUTO_INCREMENT for table `music`
 --
 ALTER TABLE `music`
-  MODIFY `music_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `music_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `passwords`
