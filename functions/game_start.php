@@ -1,7 +1,5 @@
 <?php 
-session_name('IT_Village');
-session_start();
-include ('../includes/bootstrap_includes.php');
+include ('../includes/header.php');
 $player_color = "#fff";
 ?>
 <!-- The Modal -->
