@@ -1,0 +1,27 @@
+select option[value='red']{
+	background: red;
+}
+select option[value='blue']{
+	background: blue;
+}
+select option[value='yellow']{
+	background: yellow;
+}
+select option[value='green']{
+	background: green;
+}
+select option[value='gray']{
+	background: gray;
+}
+select option[value='orange']{
+	background: orange;
+}
+select option[value='purple']{
+	background: purple;
+}
+select option[value='brown']{
+	background: brown;
+}
+select option[value='pink']{
+	background: pink;
+}

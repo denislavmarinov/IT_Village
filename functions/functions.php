@@ -1,5 +1,5 @@
 <?php 
-function dice_execude_moves($colors, $dice){
+function dice_execude_moves($colors){
 	$dice = rand(1, 6); 
 	$_SESSION['dice'] = $dice;
 		for ($j = 0; $j < 12; $j++) {
@@ -32,3 +32,4 @@ function dice_execude_moves($colors, $dice){
 	}
 	return $_SESSION['colors'];
 }
+
