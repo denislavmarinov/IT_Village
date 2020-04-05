@@ -14,14 +14,26 @@ $player_color = "#fff";
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<p>Choose a your color</p>
 				<form action="#" method="post">
-					<select name="player_color">
-						<option value="red"><span color="#fff" style="background: red;">Red</span></option>
-						<option value="blue"><span color="#fff" style="background: blue;">Blue</span></option>
-						<option value="yellow"><span color="#fff" style="background: yellow;">Yellow</span></option>
-						<option value="green"><span color="#fff" style="background: green;">Green</span></option>
-					</select>
+					<label for="moves">
+						<p>How much moves will you have?</p>
+						<input id="moves" type="number" name="moves" min="1" max="50" required>
+					</label>
+					<p></p>
+					<label for="player_color">
+						<p>Select your color</p>
+						<select id="player_color" name="player_color" required>
+							<option value="red">Red</option>
+							<option value="blue">Blue</option>
+							<option value="yellow">Yellow</option>
+							<option value="green">Green</option>
+							<option value="gray">Gray</option>
+							<option value="orange">Orange</option>
+							<option value="purple">Purple</option>
+							<option value="brown">Brown</option>
+							<option value="pink">Pink</option>
+						</select>
+					</label>
 					</div>
 
 					<!-- Modal footer -->
@@ -48,6 +60,7 @@ $player_color = "#fff";
 	else{
 		$player_color = $_POST['player_color'];
 		$_SESSION['player_color'] = $player_color;
+		$_SESSION['moves'] = $_POST['moves'];
 		include ('game_table_refresh.php');
 	}
 	if (!empty($_SESSION['player_color'])) {

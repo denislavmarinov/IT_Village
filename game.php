@@ -6,13 +6,14 @@ $colors = [];
 $possitions = [];
 $colors = $_SESSION['colors'];
 $possitions = $_SESSION['possitions'];
+$moves = $_SESSION['moves']; 
 
 ?>
 	<div class="container">
 		<div class="col-8-lg offset-2">
 
 			<svg width="200" height="200">
-				<rect x="0" y="0" width="50" height="50" style="fill: <?= $colors[0] ?>; stroke: black"><</rect>
+				<rect  x="0" y="0" width="50" height="50" style="fill: <?= $colors[0] ?>; stroke: black"><</rect>
 				<text x="15" y="37.5" font-family="Verdana" font-size="35" fill="blue"><?= $possitions[0] ?></text>
 				<!-- New Block -->
 				<rect x="50" y="0" width="50" height="50" style="fill: <?= $colors[1] ?>; stroke: black"></rect>
@@ -51,22 +52,28 @@ $possitions = $_SESSION['possitions'];
 		</div>
 	</div>
 	<div>
-<?php
-	$dice = NULL;
-	if(isset($_POST['dice_row'])){	
-		dice_execude_moves($colors, $dice);
-		echo $_SESSION['dice'];
-	}
-	if (isset($_POST['delete_session'])) {
-		unset($_SESSION['player_color']);
-		header("Location: functions/game_start.php");
-	}
-?>
 		<form action="#" method="post">
 			<input type="submit" name="dice_row" value="Хвърли зар">
+			<input type="hidden" name="moves" value="<?php $moves--?>">
 		</form>
-		<form action="#" method="post">
-			<input type="submit" name="delete_session" value="Clear Session">
-		</form>
+		<div class="row">
+			<div class="col-md-4 offset-md-4">
+				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="Dice:  <?=$_SESSION['dice']?>"></p>
+			</div>
+
+			<div class="col-md-4 offset-md-8">
+			<?= $moves ?>
+			</div>
+		</div>
 	</div>
+<?php
+	if(!empty($_POST['dice_row'])){	
+		dice_execude_moves($colors);
+		$moves = $_POST['moves'];
+	}
+	if ($moves == 0) {
+		echo 'Game ended!';
+	}
+?>
 </body>
+</html>
