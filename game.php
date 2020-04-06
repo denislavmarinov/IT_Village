@@ -1,13 +1,22 @@
 <?php 
 include ('includes/header.php');
+if ((int)$_SESSION['moves'] <= 1 && isset($_SESSION['moves'])) {
+	unset($_SESSION['player_color']);
+	unset($_SESSION['moves']);
+	unset($_SESSION);
+	header('Location: functions/game_start.php');
+}
 include ("functions/functions.php");
 $player_color = $_SESSION['player_color'];
 $colors = [];
 $possitions = [];
 $colors = $_SESSION['colors'];
 $possitions = $_SESSION['possitions'];
-$moves = $_SESSION['moves']; 
-
+$money = 50;
+$message = NULL;
+$score = NULL;
+$property_buy = [];
+$return_elements = $_SESSION['return_elements']
 ?>
 	<div class="container">
 		<div class="col-8-lg offset-2">
@@ -54,7 +63,7 @@ $moves = $_SESSION['moves'];
 	<div>
 		<form action="#" method="post">
 			<input type="submit" name="dice_row" value="Хвърли зар">
-			<input type="hidden" name="moves" value="<?php $moves--?>">
+			<input type="hidden" name="moves" value="<?php  $_SESSION['moves']--; echo $_SESSION['moves']?>">
 		</form>
 		<div class="row">
 			<div class="col-md-4 offset-md-4">
@@ -62,18 +71,25 @@ $moves = $_SESSION['moves'];
 			</div>
 
 			<div class="col-md-4 offset-md-8">
-			<?= $moves ?>
+				<p><?php var_dump($return_elements)?></p>
+				<p>You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
+				<p>Your money:  <b><?= $money ?></b></p>
+				<p>Game message: <b><?= $message ?></b></p>
+				<p>Property buy: <b><?php print_r($property_buy) ?></b></p>
+				<p>Win or loss:  <b><?= $score ?></b></p>
+
 			</div>
 		</div>
 	</div>
 <?php
-	if(!empty($_POST['dice_row'])){	
+	if(!empty($_POST['dice_row'])){
+		unset($_POST['dice_row']);
 		dice_execude_moves($colors);
-		$moves = $_POST['moves'];
+		possition_actions($colors, $possitions, $_SESSION['moves'], $money, $message, $property_buy, $score, $return_elements);
+		$return_elements = $_SESSION['return_elements'];
+		$money = $return_elements['money'];
+		$message = $return_elements['message'];
+		$property_buy = $return_elements['property_buy'];
+		$score = $return_elements['score'];
 	}
-	if ($moves == 0) {
-		echo 'Game ended!';
-	}
-?>
-</body>
-</html>
+include ('includes/footer.php');

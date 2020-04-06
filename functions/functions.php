@@ -14,7 +14,7 @@ function dice_execude_moves($colors){
 		
 				$colors[$possittion_in_array] = $player_color;
 				$_SESSION['colors'] = $colors;
-				die;
+				exit;
 			}
 			elseif ($dice+$j >= 12){
 		
@@ -26,10 +26,69 @@ function dice_execude_moves($colors){
 				
 				$colors[$possittion_in_array] = $player_color;
 				$_SESSION['colors'] = $colors;
-				die;
+				exit;
 			}
 		}
 	}
 	return $_SESSION['colors'];
 }
 
+function possition_actions($colors, $possitions, $moves, $money, $message, $property_buy, $score, $return_elements){
+	for ($k = 0; $k < 12; $k++) {
+		if($colors[$k] != "#fff"){
+			$current_possition = $k;
+		}
+	}
+	$action_name = $possitions[$current_possition];
+	switch ($action_name) {
+		case "P":
+		$money -= 5;
+		$message = "";
+		break;
+		
+		case "I":
+			if (!isset($property_buy[$current_possition]) && $money > 100) {
+				$money -= 100; 
+				$message = "";
+				$property_buy[$current_possition] = true;
+			}
+			elseif ($property_buy == true) {
+				$money += 20;
+				$message = "";
+			}
+			elseif ($money <= 100) {
+				$money -=  10;
+				$message = "";
+			}
+		break;
+
+		case "F":
+		$money += 20;
+		$message = "";
+		break;
+
+		case "S":
+		$_SESSION['moves'] -= 2;
+		$message = "";
+		break;
+
+		case "V":
+		$money = $money * 10;
+		$message = "";
+		break;
+
+		case "N":
+		$score = "win";
+		$message = "";
+		break;
+	}
+	$return_elements = [
+		'money' => $money,
+		'message' => $message,
+		'moves' => $_SESSION['moves'],
+		'property_buy' => $property_buy,
+		'score' => $score
+	];
+	$_SESSION['return_elements'] = $return_elements;
+	return $return_elements;
+}
