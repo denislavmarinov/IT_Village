@@ -60,7 +60,7 @@ $player_color = "#fff";
 	else{
 		$player_color = $_POST['player_color'];
 		$_SESSION['player_color'] = $player_color;
-		$_SESSION['moves'] = $_POST['moves'];
+		$_SESSION['moves'] = (int)$_POST['moves']+1;
 		include ('game_table_refresh.php');
 	}
 	if (!empty($_SESSION['player_color'])) {
