@@ -48,5 +48,3 @@ else{
   </div>
     <button type="submit" class="btn btn-secondary">Sign in</button>
 </form>
-
-  
