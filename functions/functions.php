@@ -14,7 +14,7 @@ function dice_execude_moves($colors){
 		
 				$colors[$possittion_in_array] = $player_color;
 				$_SESSION['colors'] = $colors;
-				exit;
+				break;
 			}
 			elseif ($dice+$j >= 12){
 		
@@ -26,7 +26,7 @@ function dice_execude_moves($colors){
 				
 				$colors[$possittion_in_array] = $player_color;
 				$_SESSION['colors'] = $colors;
-				exit;
+				break;
 			}
 		}
 	}
