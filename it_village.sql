@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2020 at 05:01 PM
+-- Generation Time: Apr 13, 2020 at 12:54 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -69,7 +69,7 @@ CREATE TABLE `passwords` (
 
 CREATE TABLE `results` (
   `result_id` int(11) NOT NULL,
-  `user_name_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `wins` int(4) DEFAULT NULL,
   `losses` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -95,11 +95,11 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `user_name` varchar(60) NOT NULL,
+  `username` varchar(60) NOT NULL,
   `email` varchar(255) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `data_registered` date NOT NULL,
-  `data_deleted` date DEFAULT NULL
+  `date_registered` date NOT NULL,
+  `date_deleted` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -136,7 +136,7 @@ ALTER TABLE `passwords`
 --
 ALTER TABLE `results`
   ADD PRIMARY KEY (`result_id`),
-  ADD KEY `user_name_id` (`user_name_id`);
+  ADD KEY `user_name_id` (`user_id`);
 
 --
 -- Indexes for table `roles`
@@ -150,7 +150,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_name` (`user_name`),
+  ADD UNIQUE KEY `user_name` (`username`),
   ADD KEY `role_id` (`role_id`);
 
 --
@@ -222,7 +222,7 @@ ALTER TABLE `passwords`
 -- Constraints for table `results`
 --
 ALTER TABLE `results`
-  ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`result_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `users`
