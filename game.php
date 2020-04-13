@@ -73,10 +73,10 @@ $return_elements = $_SESSION['return_elements'];
 			<div class="col-md-4 offset-md-8">
 				<p><?php var_dump($return_elements)?></p>
 				<p>You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
-				<p>Your money:  <b><?= $return_elements['money'] ?></b></p>
-				<p>Game message: <b><?= $return_elements['message'] ?></b></p>
+				<p>Your money:  <b><?= $_SESSION['return_elements'['money']] ?></b></p>
+				<p>Game message: <b><?= $_SESSION['return_elements'['message']] ?></b></p>
 				<p>Property buy: <b><?php print_r($_SESSION['property_buy']) ?></b></p>
-				<p>Win or loss:  <b><?= $return_elements['score'] ?></b></p>
+				<p>Win or loss:  <b><?= $_SESSION['return_elements'['score']] ?></b></p>
 
 			</div>
 		</div>
@@ -85,7 +85,8 @@ $return_elements = $_SESSION['return_elements'];
 	if(!empty($_POST['dice_row'])){
 		unset($_POST['dice_row']);
 		dice_execude_moves($colors);
-		possition_actions($colors, $possitions, $_SESSION['moves'], $_SESSION['money'], $_SESSION['message'], $_SESSION['property_buy'], $_SESSION['score'], $return_elements);
+		;
+		var_dump(possition_actions($colors, $possitions, $_SESSION['moves'], $_SESSION['money'], $_SESSION['message'], $_SESSION['property_buy'], $_SESSION['score'], $return_elements));
 		// $return_elements = $_SESSION['return_elements'];
 		// $money = $return_elements['money'];
 		// $message = $return_elements['message'];
