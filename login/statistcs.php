@@ -51,7 +51,7 @@ $result = mysqli_query($conn, $query);
 // 	die("Error" . mysqli_error($conn));
 // }
 $wins = mysqli_fetch_assoc($result);
-var_dump($wins);
+// var_dump($wins);
 
 $query = "SELECT SUM(`losses`) AS `sum_losses` FROM `results`";
 
@@ -61,8 +61,60 @@ $result = mysqli_query($conn, $query);
 // }
 
 $losses = mysqli_fetch_assoc($result);
-var_dump($losses);
+// var_dump($losses);
 ?>
-<p>Game_played</p>
+<p>Games played</p>
+<style>
+.circularPercentage {
+  transform: rotate(-90deg);
+}
+.wins_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #0f0b;
+  border-radius: 50%;
+  display: inline-block;
+}
+.losses_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #f00;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+</style>
+<?php 
+
+$games_played = (int)$wins['sum_wins'] + (int)$losses['sum_losses'];
+
+//Find how percents is wins of all games played
+$win_percent = (int)$wins['sum_wins'] / $games_played;
+
+//Find how percents is losses of all games played
+$loss_percent = (int)$losses['sum_losses'] / $games_played;
+
+//Find how much points of the pie chart is wins
+$pie_chart_wins = $win_percent * 424.17;
+
+//Find how much points of the pie chart is losses
+$pie_chart_losses = $loss_percent * 424.17;
+
+?>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6">
+			<svg class="circularPercentage" fill="none" width="150" height="150">
+			    <circle class="background" fill="none" stroke="#f00" cx="75" cy="75" stroke-width="15" r="67.5"></circle>
+			    <circle class="percentage" fill="none" cx="75" cy="75" stroke="#0f0" stroke-width="15" r="67.5" stroke-dasharray="<?= $pie_chart_wins?> <?= $pie_chart_losses?>" stroke-dashoffset="0"></circle>
+			</svg>
+		</div>
+		<div class="col-lg-6">
+			<p>Legend:</p>
+			<p>Wins: <span class="wins_dot"></span>Green color <?php  echo round($win_percent*100) . "%"; ?></p>
+			<p>Losses:<span class="losses_dot"></span> Red color <?php echo round($loss_percent*100) . "%"; ?></p>
+		</div>
+	</div>
+`</div>
 <?php
 include('../includes/footer.php');
