@@ -1,5 +1,5 @@
 <?php
-include 'includes/db_connect.php';
+//include 'includes/db_connect.php';
 ?>
 <?php 
 session_name('IT_Village');
