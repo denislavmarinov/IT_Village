@@ -15,44 +15,44 @@ session_start();
       <style>
         body {
           margin: 0;
-          background: #28a745;
+          /*background: #7112DB;*/
+          background-image: linear-gradient(-60deg, #983DDF, #7112DB, #340F70);
+        }
+        h3 {
+          color: #C94EF2; 
         }
       /* Style the header */
-.header {
+/*.header {
   background-color: #f1f1f1;
   padding: 7px;
   text-align: center;
-}
-* {
+}*/
+* /*{
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
+}*/
 
 /* Style the header */
 /*.header {
   background-color: #f1f1f1;
   padding: 20px;
-  text-align: center;
-}*/
-
-/* Style the top navigation bar */
-.topnav {
-  overflow: hidden;
-  background-color: #333;
+  text-align: center;*/
 }
 
+/* Style the top navigation bar */
+/*.topnav {
+  overflow: hidden;
+  background-color: #333;
+}*/
+
 /* Style the topnav links */
-.topnav a {
+/*.topnav a {
   float: left;
   display: block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-}
+}*/
 
 /* Change color on hover */
 /*.topnav a:hover {
