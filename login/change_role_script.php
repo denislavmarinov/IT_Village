@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
 		$user_role_from_post = filter_var($_POST['new_role'], FILTER_SANITIZE_NUMBER_INT);
 	}
 	else{
-		header ("Location: statistics.php");
+		header ("Location: profile.php");
 	}
 
 	$user_id = mysqli_real_escape_string($conn, $user_id_from_post);
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 		die("Error" . mysqli_error($conn));
 	}
 	else{
-		header("Location: statistcs.php");
+		header("Location: profile.php");
 	}
 }
 

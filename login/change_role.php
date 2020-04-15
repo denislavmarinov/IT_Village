@@ -2,20 +2,6 @@
 include ('../includes/header.php');
 include ('../includes/db_connect.php');
 
-$user_id = $_GET['user_id'];
-
-$query = "SELECT r.`role_name`, u.`username` FROM roles r JOIN users u ON r.`role_id`=u.`role_id` WHERE u.`user_id` ='". $user_id . "' LIMIT 1";
-
-$result = mysqli_query($conn, $query);
-
-// if (mysqli_num_rows($result) < 0) {
-// 	die("Error" . mysqli_error($conn));
-// }
-
-$row = mysqli_fetch_assoc($result);
-$user_role = $row['role_name'];
-$username = $row['username'];
-
 $query = "SELECT `role_id`, `role_name` FROM `roles`";
 
 $result = mysqli_query($conn, $query);
@@ -29,7 +15,16 @@ while ($row = mysqli_fetch_assoc($result)) {
     $roles[$num]['name'] = $row['role_name'];
     $num++;
 }
+
+$query = "SELECT r.`role_name`, u.`username`, u.`user_id` FROM roles r JOIN users u ON r.`role_id`=u.`role_id`";
+
+$result = mysqli_query($conn, $query);
+
+// if (mysqli_num_rows($result) < 0) {
+// 	die("Error" . mysqli_error($conn));
+// }
 ?>
+
 <table class="table table-striped" style="background-color: #fff;">
 	<thead>
 		<tr>
@@ -39,15 +34,18 @@ while ($row = mysqli_fetch_assoc($result)) {
 		</tr>
 	</thead>
 	<tbody>
+<?php 
+while ($row = mysqli_fetch_assoc($result)) {
+    ?>
 		<tr>
-			<td><?= $username?></td>
+			<td><?= $row['username']?></td>
 			<form action="change_role_script.php" method="post">
 				<td>
 					<select name="new_role">
 						<?php 
 							for ($i = 0; $i < count($roles); $i++) {
 								$selected = NULL;
-								if ($user_role == $roles[$i]['name']) {
+								if ($row['role_name'] == $roles[$i]['name']) {
 									$selected = "selected";
 								}
 								?>
@@ -58,11 +56,17 @@ while ($row = mysqli_fetch_assoc($result)) {
 					</select>
 				</td>
 				<td>
-					<input type="hidden" name="user_id" value="<?=$user_id?>">
-					<input class="btn btn-outline-secondary" type="submit" name="submit" value="Confirm">
+					<input type="hidden" name="user_id" value="<?=$row['user_id']?>">
+					<input class="btn btn-outline-secondary" type="submit" name="submit" value="Change role">
 				</td>
 			</form>
 		</tr>
+
+    <?php
+}
+
+
+?>	
 	</tbody>
 </table>
 <?php
