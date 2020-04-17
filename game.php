@@ -1,6 +1,5 @@
 <?php
-session_name("IT_Village");
-session_start();
+include ('includes/header.php');
 // Head variables
 $link = "img/logo_1.jpg";
 $title = "Game page";
@@ -14,12 +13,11 @@ $possitions = $_SESSION['possitions'];
 if (!isset($_SESSION['moves'])) {
 	header ("Location: functions/game_start.php");
 }
-//include ('includes/header.php');
-if ((int)$_SESSION['moves'] <= 1) {
-	echo '<style>#dice{display: none;</style>';
+if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
+	echo '<style>#dice{display: none;} #game_stats{display: none;} #dice_image{display: none;}</style>';
 	unset($_SESSION['player_color']);
 	?>
-	<table style="background: #fff" class="table-striped">
+	<table style="background: #fff" class="table table-striped">
 				<thead>
 					<tr>
 						<th>Пари</th>
@@ -32,8 +30,7 @@ if ((int)$_SESSION['moves'] <= 1) {
 				<tbody>
 					<tr>
 						<td><?= $_SESSION['money']?></td>
-						<td></td>
-						<!-- <td><?= $_SESSION['game_end_reason']?></td> -->
+						<td><?= $_SESSION['game_end_message']?></td>
 						<td><?= count($_SESSION['property_buy'])?> бр.</td>
 						<td>3 бр.</td>
 						<td>
@@ -49,12 +46,13 @@ if ((int)$_SESSION['moves'] <= 1) {
 				</tbody>
 			</table>
 	<?php
+
 }
 include ("functions/functions.php");
 
 ?>
 	<div class="container">
-		<div class="col-8-lg offset-2">
+		<div class="col-4 offset-4">
 
 			<svg width="200" height="200">
 				<rect  x="0" y="0" width="50" height="50" style="fill: <?= $colors[0] ?>; stroke: black"><</rect>
@@ -96,36 +94,32 @@ include ("functions/functions.php");
 		</div>
 	</div>
 	<div>
-		<form action="#" method="post" id="dice">
-			<input type="submit" name="dice_row" value="Хвърли зар">
-			<input type="hidden" name="moves" value="<?php  $_SESSION['moves']--; echo $_SESSION['moves']?>">
-		</form>
-		<div class="row">
-			<div class="col-md-4 offset-md-4">
-				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="Dice:  <?=$_SESSION['dice']?>"></p>
-			</div>
-
-			<div class="col-md-4 offset-md-8">
-				<p><?php //var_dump($return_elements)?></p>
-				<p>You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
-				<p>Your money:  <b><?= $_SESSION['money'] ?></b></p>
-				<p>Game message: <b><?= $_SESSION['message'] ?></b></p>
-				<p>Property buy: <b><?php print_r($_SESSION['property_buy']) ?></b></p>
-				<p>Win or loss:  <b><?= $_SESSION['score'] ?></b></p>
-
-			</div>
-		</div>
-	</div>
 <?php
 	if(!empty($_POST['dice_row'])){
 		unset($_POST['dice_row']);
 		dice_execude_moves($colors);
 		;
 		possition_actions($colors, $possitions, $_SESSION['moves'], $_SESSION['money'], $_SESSION['message'], $_SESSION['property_buy'], $_SESSION['score']);
-		// $return_elements = $_SESSION;
-		// $money = $return_elements['money'];
-		// $message = $return_elements['message'];
-		// $property_buy = $return_elements['property_buy'];
-		// $score = $return_elements['score'];
+		game_end($_SESSION['money'], $_SESSION['property_buy'], $_SESSION['moves']);
 	}
+?>
+		<form action="#" method="post" id="dice">
+			<input type="submit" name="dice_row" value="Хвърли зар">
+			<input type="hidden" name="moves" value="<?php  $_SESSION['moves']--; echo $_SESSION['moves']?>">
+		</form>
+		<div class="row">
+			<div id="dice_image" class="col-md-4 offset-md-4">
+				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="Dice:  <?=$_SESSION['dice']?>"></p>
+			</div>
+
+			<div id="game_stats" class="col-md-4 offset-md-8">
+				<p>Game message:</p>
+				<p class="alert alert-info"><?= $_SESSION['message'] ?></p>
+				<p>You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
+				<p>Your money:  <b><?= $_SESSION['money'] ?></b></p>
+				<p>Property buy: <b><?php echo count($_SESSION['property_buy']) ?></b></p>
+			</div>
+		</div>
+	</div>
+<?php
 include ('includes/footer.php');

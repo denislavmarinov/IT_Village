@@ -43,43 +43,44 @@ function possition_actions($colors, $possitions, $moves, $money, $message, $prop
 	switch ($action_name) {
 		case "P":
 		$money -= 5;
-		$message = "";
+		$message = "Вие загубихте 5 пари!";
 		break;
 		
 		case "I":
 			if (!isset($property_buy[$current_possition]) && $money > 100) {
 				$money -= 100; 
-				$message = "";
+				$message = "Вие закупихте мотел!";
 				$property_buy[$current_possition] = true;
 			}
 			elseif ($property_buy == true) {
 				$money += 20;
-				$message = "";
+				$message = "Вие спечелихте от вашия мотел";
 			}
 			elseif ($money <= 100) {
 				$money -=  10;
-				$message = "";
+				$message = "Вие спахте в мотел. Загубихте 10 пари!";
 			}
 		break;
 
 		case "F":
 		$money += 20;
-		$message = "";
+		$message = "Честито! Успешен проект! Печелите 20 пари!";
 		break;
 
 		case "S":
-		$_SESSION['moves'] -= 2;
-		$message = "";
+		$moves -= 2;
+		$message = "Нямате Интернет! Губите 2 хода!";
 		break;
 
 		case "V":
 		$money = $money * 10;
-		$message = "";
+		$message = "Умножихте капитала Ви десетократно!!!";
 		break;
 
 		case "N":
 		$score = "win";
-		$message = "";
+		$message = "Спечелихте играта с помощтна на VSC";
+		$_SESSION['game_end_message'] = "Спечелихте с помощта на VSC";
 		break;
 	}
 	$_SESSION['moves'] = $moves;
@@ -88,4 +89,19 @@ function possition_actions($colors, $possitions, $moves, $money, $message, $prop
 	$_SESSION['property_buy'] = $property_buy;
 	$_SESSION['score'] = $score;
 
+}
+
+function game_end($money, $property_buy, $moves){
+	if ($money <= 0) {
+		$_SESSION['game_end_message'] = "Парите Ви свършиха";
+		$_SESSION['score'] = "loss";
+	}
+	elseif (count($property_buy) == 3) {
+		$_SESSION['game_end_message'] = "Вие купихте всички имоти";
+		$_SESSION['score'] = "win";
+	}
+	elseif ($moves <= 0) {
+		$_SESSION['game_end_message'] = "Нямате повече ходове";
+		$_SESSION['score'] = "loss";
+	}
 }
