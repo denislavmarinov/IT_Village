@@ -1,4 +1,6 @@
 <?php 
+$link = "../img/logo_1.jpg";
+$title = "Start game";
 include ('../includes/header.php');
 $player_color = "#fff";
 ?>
@@ -61,6 +63,9 @@ $player_color = "#fff";
 		$player_color = $_POST['player_color'];
 		$_SESSION['player_color'] = $player_color;
 		$_SESSION['moves'] = (int)$_POST['moves']+1;
+		$_SESSION['money'] = 50;
+		$_SESSION['message'] = "";
+		$_SESSION['property_buy'] = [];
 		include ('game_table_refresh.php');
 	}
 	if (!empty($_SESSION['player_color'])) {
