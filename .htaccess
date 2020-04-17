@@ -1,1 +1,43 @@
-IndexIgnore *
+AddDefaultCharset UTF-8
+DefaultLanguage bg-BG
+
+
+#Prevent directory listing
+Options -Indexes
+
+
+# Set the Time Zone of the Server
+SetEnv TZ Bulgaria/Sofia
+
+#Custom error files
+ErrorDocument 400 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 401 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 402 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 403 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 404 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 405 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 406 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 407 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 408 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 409 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 410 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 411 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 412 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 413 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 414 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 415 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 416 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 417 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 422 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 423 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 424 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 426 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 500 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 501 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 502 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 503 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 504 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 505 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 506 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 507 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+ErrorDocument 510 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php

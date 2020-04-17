@@ -33,7 +33,7 @@ function dice_execude_moves($colors){
 	return $_SESSION['colors'];
 }
 
-function possition_actions($colors, $possitions, $moves, $money, $message, $property_buy, $score, $return_elements){
+function possition_actions($colors, $possitions, $moves, $money, $message, $property_buy, $score){
 	for ($k = 0; $k < 12; $k++) {
 		if($colors[$k] != "#fff"){
 			$current_possition = $k;
@@ -82,13 +82,10 @@ function possition_actions($colors, $possitions, $moves, $money, $message, $prop
 		$message = "";
 		break;
 	}
-	$return_elements = [
-		'money' => $money,
-		'message' => $message,
-		'moves' => $_SESSION['moves'],
-		'property_buy' => $property_buy,
-		'score' => $score
-	];
-	$_SESSION['return_elements'] = $return_elements;
-	return $return_elements;
+	$_SESSION['moves'] = $moves;
+	$_SESSION['money'] = $money;
+	$_SESSION['message'] = $message;
+	$_SESSION['property_buy'] = $property_buy;
+	$_SESSION['score'] = $score;
+
 }
