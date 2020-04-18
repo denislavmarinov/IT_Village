@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2020 at 12:54 PM
+-- Generation Time: Apr 17, 2020 at 05:15 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -61,6 +61,14 @@ CREATE TABLE `passwords` (
   `password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `passwords`
+--
+
+INSERT INTO `passwords` (`password_id`, `user_id`, `password`) VALUES
+(1, 5, '123456'),
+(2, 6, '123456');
+
 -- --------------------------------------------------------
 
 --
@@ -74,6 +82,17 @@ CREATE TABLE `results` (
   `losses` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`result_id`, `user_id`, `wins`, `losses`) VALUES
+(1, 5, 10, 3),
+(2, 6, 4, 19),
+(3, 7, 10, 19),
+(4, 8, 19, 3),
+(5, 9, 30, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +105,14 @@ CREATE TABLE `roles` (
   `role_description` varchar(150) NOT NULL,
   `date_deleted` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`role_id`, `role_name`, `role_description`, `date_deleted`) VALUES
+(1, 'admin', 'Full roghts', NULL),
+(2, 'user', 'Custom rights', NULL);
 
 -- --------------------------------------------------------
 
@@ -101,6 +128,17 @@ CREATE TABLE `users` (
   `date_registered` date NOT NULL,
   `date_deleted` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `role_id`, `date_registered`, `date_deleted`) VALUES
+(5, 'admin', 'admin@example.com', 1, '2020-04-13', NULL),
+(6, 'root', 'root@example.com', 2, '2020-04-13', NULL),
+(7, 'test', 'test@example.com', 2, '2020-04-15', NULL),
+(8, 'test1', 'test1@example.com', 2, '2020-04-15', NULL),
+(9, 'test2', 'test2@example.com', 2, '2020-04-15', NULL);
 
 --
 -- Indexes for dumped tables
@@ -173,25 +211,25 @@ ALTER TABLE `music`
 -- AUTO_INCREMENT for table `passwords`
 --
 ALTER TABLE `passwords`
-  MODIFY `password_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `password_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

@@ -66,6 +66,8 @@ $player_color = "#fff";
 		$_SESSION['money'] = 50;
 		$_SESSION['message'] = "";
 		$_SESSION['property_buy'] = [];
+		$_SESSION['score'] = "";
+		$_SESSION['game_end_message'] = "";
 		include ('game_table_refresh.php');
 	}
 	if (!empty($_SESSION['player_color'])) {
