@@ -55,7 +55,7 @@ include ("functions/functions.php");
 		<div class="col-4 offset-4">
 
 			<svg width="200" height="200">
-				<rect  x="0" y="0" width="50" height="50" style="fill: <?= $colors[0] ?>; stroke: black"><</rect>
+				<rect  x="0" y="0" width="50" height="50" style="fill: <?= $colors[0] ?>; stroke: black"></rect>
 				<text x="15" y="37.5" font-family="Verdana" font-size="35" fill="blue"><?= $possitions[0] ?></text>
 				<!-- New Block -->
 				<rect x="50" y="0" width="50" height="50" style="fill: <?= $colors[1] ?>; stroke: black"></rect>
