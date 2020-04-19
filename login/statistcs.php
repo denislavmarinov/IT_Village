@@ -21,8 +21,12 @@ include('../includes/db_connect.php');
 if (isset($_POST['submit'])) {
 	include ("sort.php");
 }
+if (isset($sort)) {
+	$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id" . $sort;
+} else{
+	$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id";
+}
 
-$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id" . $sort;
 
 $result = mysqli_query($conn, $query);
 
