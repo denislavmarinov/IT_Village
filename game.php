@@ -30,25 +30,25 @@ if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
 	<table id="game_end_table" style="background: #fff" class="table table-striped">
 				<thead>
 					<tr>
-						<th>Пари</th>
-						<th>Причина за свършване на играта</th>
-						<th>Купени мотели</th>
-						<th>Общ брой мотели </th>
-						<th>Победа / Загуба</th>
+						<th>Money</th>
+						<th>Game end reason</th>
+						<th>Motels bought</th>
+						<th>Count all motels</th>
+						<th>Win / Loss</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td><?= $_SESSION['money']?></td>
 						<td><?= $_SESSION['game_end_message']?></td>
-						<td><?= count($_SESSION['property_buy'])?> бр.</td>
-						<td>3 бр.</td>
+						<td><?= count($_SESSION['property_buy'])?> psc.</td>
+						<td>3 psc.</td>
 						<td>
 						<?php
 						if ($_SESSION['score'] == "win") {
-							echo "<span style='color: #0f0; font-weight: bold; '>Победа</span>";
+							echo "<span style='color: #0f0; font-weight: bold; '>Win</span>";
 						}else{
-							echo "<span style='color: #f00; font-weight: bold; '>Загуба</span>";
+							echo "<span style='color: #f00; font-weight: bold; '>Loss</span>";
 						}
 						?>
 						</td>
