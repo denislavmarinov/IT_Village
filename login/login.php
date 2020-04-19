@@ -31,8 +31,8 @@ include '../includes/header.php';
     <input type="submit" name="submit" class="btn btn-danger" id="login" value="JOIN to game"> 
   </form>
 </div>
-</div>
 </nav>
+</div>
 
 <?php
 $loggedin = NULL;
