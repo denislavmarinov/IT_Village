@@ -3,8 +3,11 @@ $link = "../img/logo_1.jpg";
 $title = "Statistics";
 include('../includes/header.php');
 include('../includes/db_connect.php');
+if ($_SESSION['loggedin'] != true) {
+	header("Location: login.php");
+}
 ?>
-<a href="proflie.php" class="btn btn-outline-light">Go back to your profile</a>
+<a href="profile.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to your profile</a>
 <form class="form-group" action="#" method="post">
 	<div class="form-group">
 		<div class="input-group mb-3">

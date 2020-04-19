@@ -1,5 +1,7 @@
 <?php 
-
+if (!isset($_SESSION['profile_key'])) {
+	header("Location: profile.php");
+}
 ?>
 <ul>
 	<li><a class="btn btn-outline-success" href="profile.php">profile</a></li>
