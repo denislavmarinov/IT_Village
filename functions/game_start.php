@@ -62,7 +62,7 @@ $player_color = "#fff";
 	else{
 		$player_color = $_POST['player_color'];
 		$_SESSION['player_color'] = $player_color;
-		$_SESSION['moves'] = (int)$_POST['moves']+1;
+		$_SESSION['moves'] = (int)$_POST['moves'];
 		$_SESSION['money'] = 50;
 		$_SESSION['message'] = "";
 		$_SESSION['property_buy'] = [];

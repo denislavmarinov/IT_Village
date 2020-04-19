@@ -17,7 +17,7 @@ if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
 	echo '<style>#dice{display: none;} #game_stats{display: none;} #dice_image{display: none;}</style>';
 	unset($_SESSION['player_color']);
 	?>
-	<table style="background: #fff" class="table table-striped">
+	<table id="game_end_table" style="background: #fff" class="table table-striped">
 				<thead>
 					<tr>
 						<th>Пари</th>
@@ -94,22 +94,13 @@ include ("functions/functions.php");
 		</div>
 	</div>
 	<div>
-<?php
-	if(!empty($_POST['dice_row'])){
-		unset($_POST['dice_row']);
-		dice_execude_moves($colors);
-		;
-		possition_actions($colors, $possitions, $_SESSION['moves'], $_SESSION['money'], $_SESSION['message'], $_SESSION['property_buy'], $_SESSION['score']);
-		game_end($_SESSION['money'], $_SESSION['property_buy'], $_SESSION['moves']);
-	}
-?>
-		<form action="#" method="post" id="dice">
+		<form action="game_script.php" method="post" id="dice">
 			<input type="submit" name="dice_row" value="Хвърли зар">
-			<input type="hidden" name="moves" value="<?php  $_SESSION['moves']--; echo $_SESSION['moves']?>">
+			<!-- <input type="hidden" name="moves" value="--><?php  //$_SESSION['moves']--; echo $_SESSION['moves']?><!--"> -->
 		</form>
 		<div class="row">
 			<div id="dice_image" class="col-md-4 offset-md-4">
-				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="Dice:  <?=$_SESSION['dice']?>"></p>
+				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="<?=$_SESSION['dice']?>"></p>
 			</div>
 
 			<div id="game_stats" class="col-md-4 offset-md-8">

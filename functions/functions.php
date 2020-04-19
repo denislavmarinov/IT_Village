@@ -1,4 +1,4 @@
-<?php 
+<?php
 function dice_execude_moves($colors){
 	$dice = rand(1, 6); 
 	$_SESSION['dice'] = $dice;
@@ -34,7 +34,7 @@ function dice_execude_moves($colors){
 }
 
 function possition_actions($colors, $possitions, $moves, $money, $message, $property_buy, $score){
-	for ($k = 0; $k < 12; $k++) {
+	for ($k = 0; $k < 12; $k++){
 		if($colors[$k] != "#fff"){
 			$current_possition = $k;
 		}
