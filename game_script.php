@@ -23,5 +23,5 @@ if(!empty($_POST['dice_row'])){
 	header("Location: game.php");
 }
 else{
-	header("Location: game.php");
+	header("Location: login/login.php");
 }
