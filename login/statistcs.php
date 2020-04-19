@@ -4,17 +4,30 @@ $title = "Statistics";
 include('../includes/header.php');
 include('../includes/db_connect.php');
 ?>
+<a href="proflie.php" class="btn btn-outline-light">Go back to your profile</a>
 <form class="form-group" action="#" method="post">
-	<select class="form-control" name="column">
-		<option value="1">Name</option>
-		<option value="2">Wins</option>
-		<option value="3">Losses</option>
-	</select>
-	<select class="form-control" name="sort_way">
-		<option value="1">Ascending</option>
-		<option value="2">Descending</option>
-	</select>
-	<input class="btn btn-secondary" type="submit" name="submit" value="Sort">
+	<div class="form-group">
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">Select the column to sort by:</span>
+				<select id="column" name="column" class="form-control">
+					<option value="1">Name</option>
+					<option value="2">Wins</option>
+					<option value="3">Losses</option>
+				</select>
+			</div>
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">Select how to sort:</span>
+				<select id="sort_way" name="sort_way" class="form-control">
+					<option value="1">Ascending</option>
+					<option value="2">Descending</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<input class="btn btn-outline-secondary" type="submit" name="submit" value="Sort">
 </form>
 <?php
 
@@ -29,10 +42,6 @@ if (isset($sort)) {
 
 
 $result = mysqli_query($conn, $query);
-
-// if (mysqli_num_rows($result) < 0) {
-// 	die("Error" . mysqli_error($conn));
-// }
 ?>
 <p>Players</p>
 <table class="table table-striped" style="background-color: #fff;">
@@ -64,21 +73,16 @@ $result = mysqli_query($conn, $query);
 $query = "SELECT SUM(`wins`) AS `sum_wins` FROM `results`";
 
 $result = mysqli_query($conn, $query);
-// if (mysqli_num_rows($result) < 0) {
-// 	die("Error" . mysqli_error($conn));
-// }
+
 $wins = mysqli_fetch_assoc($result);
-// var_dump($wins);
+
 
 $query = "SELECT SUM(`losses`) AS `sum_losses` FROM `results`";
 
 $result = mysqli_query($conn, $query);
-// if (mysqli_num_rows($result) < 0){
-// 	die("Error" . mysqli_error($conn));	
-// }
 
 $losses = mysqli_fetch_assoc($result);
-// var_dump($losses);
+
 ?>
 <p>Games played</p>
 <style>

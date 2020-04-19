@@ -80,7 +80,7 @@ function possition_actions($colors, $possitions, $moves, $money, $message, $prop
 		case "N":
 		$score = "win";
 		$message = "You won the game with the help of VSC";
-		$_SESSION['game_end_message'] = "Спечелихте с помощта на VSC";
+		$_SESSION['game_end_message'] = "You won the game with the help of VSC";
 		break;
 	}
 	$_SESSION['moves'] = $moves;

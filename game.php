@@ -12,9 +12,9 @@ if (!isset($_SESSION['moves'])) {
 	header ("Location: functions/game_start.php");
 }
 //Check if  player color is not set
-// if (!isset($_SESSION['player_color'])) {
-// 	header ("Location: functions/game_start.php");
-// }
+if (!isset($_SESSION['player_color'])) {
+	header ("Location: functions/game_start.php");
+}
 //Game variables
 
 $player_color = $_SESSION['player_color'];
@@ -28,33 +28,33 @@ if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
 	unset($_SESSION['player_color']);
 	?>
 	<table id="game_end_table" style="background: #fff" class="table table-striped">
-				<thead>
-					<tr>
-						<th>Money</th>
-						<th>Game end reason</th>
-						<th>Motels bought</th>
-						<th>Count all motels</th>
-						<th>Win / Loss</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><?= $_SESSION['money']?></td>
-						<td><?= $_SESSION['game_end_message']?></td>
-						<td><?= count($_SESSION['property_buy'])?> psc.</td>
-						<td>3 psc.</td>
-						<td>
-						<?php
-						if ($_SESSION['score'] == "win") {
-							echo "<span style='color: #0f0; font-weight: bold; '>Win</span>";
-						}else{
-							echo "<span style='color: #f00; font-weight: bold; '>Loss</span>";
-						}
-						?>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+		<thead>
+			<tr>
+				<th>Money</th>
+				<th>Game end reason</th>
+				<th>Motels bought</th>
+				<th>Count all motels</th>
+				<th>Win / Loss</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?= $_SESSION['money']?></td>
+				<td><?= $_SESSION['game_end_message']?></td>
+				<td><?= count($_SESSION['property_buy'])?> psc.</td>
+				<td>3 psc.</td>
+				<td>
+				<?php
+				if ($_SESSION['score'] == "win") {
+					echo "<span style='color: #0f0; font-weight: bold; '>Win</span>";
+				}else{
+					echo "<span style='color: #f00; font-weight: bold; '>Loss</span>";
+				}
+				?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	<?php
 	$query = "SELECT `user_id` FROM `results`";
 	$result = mysqli_query($conn, $query);
