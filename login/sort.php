@@ -1,4 +1,7 @@
 <?php 
+if ($_SESSION['loggedin'] != true) {
+	header("Location: login.php");
+}
 
 if (isset($_POST['submit'])) {
 	if (is_numeric($_POST['column']) && is_numeric($_POST['sort_way'])) {
@@ -23,6 +26,6 @@ if (isset($_POST['submit'])) {
 	];
 
 	$sort = " ORDER BY `".$column_names[$column]."` ".$sort_way_names[$sort_way]."";
-
-
+}else{
+	header("Location: statistics.php");
 }

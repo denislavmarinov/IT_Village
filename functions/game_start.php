@@ -2,74 +2,63 @@
 $link = "../img/logo_1.jpg";
 $title = "Start game";
 include ('../includes/header.php');
+if ($_SESSION["loggedin"] != true) {
+	header("Location: login/login.php");
+}
 $player_color = "#fff";
 ?>
-<!-- The Modal -->
-	<div class="modal" id="myModal">
-		<div class="modal-dialog">
-		<div class="modal-content">
-
-			<!-- Modal Header -->
-			<div class="modal-header">
-			<h4 class="modal-title">To start the game:</h4>
-			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body">
-				<form action="#" method="post">
-					<label for="moves">
-						<p>How much moves will you have?</p>
-						<input id="moves" type="number" name="moves" min="1" max="50" required>
-					</label>
-					<p></p>
-					<label for="player_color">
-						<p>Select your color</p>
-						<select id="player_color" name="player_color" required>
-							<option value="red">Red</option>
-							<option value="blue">Blue</option>
-							<option value="yellow">Yellow</option>
-							<option value="green">Green</option>
-							<option value="gray">Gray</option>
-							<option value="orange">Orange</option>
-							<option value="purple">Purple</option>
-							<option value="brown">Brown</option>
-							<option value="pink">Pink</option>
-						</select>
-					</label>
-					</div>
-
-					<!-- Modal footer -->
-					<div class="modal-footer">
-					<input class="btn btn-success" type="submit" name="submit">
-				</form>
-			</div>
-
-			</div>
+<div class="container">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
+	<a class="navbar-brand" href="../index.php">
+	<img id="img" src="../img/logo_1.jpg" alt="logo" style="width: 150px;"><p>Home</p></a>
+		<div class="container">
+		<h4 class="text-warning">JOIN to g@me IT Vill@ge</h4>
+			<form action="#" method="post" class="">
+				<div class="form-group">
+					<label for="moves" class="text-warning">How much moves will you have?</label>
+					<input id="moves" type="number" name="moves" min="1" max="50" required>
+				</div>
+				<div class="form-group">
+					<label for="player_color" class="text-warning">Select your color</label>
+					<select id="player_color" name="player_color" required>
+						<option value="red">Red</option>
+						<option value="blue">Blue</option>
+						<option value="yellow">Yellow</option>
+						<option value="green">Green</option>
+						<option value="gray">Gray</option>
+						<option value="orange">Orange</option>
+						<option value="purple">Purple</option>
+						<option value="brown">Brown</option>
+						<option value="pink">Pink</option>
+					</select>
+				</div>
+				<input class="btn btn-success" type="submit" name="submit">
+			</form>
 		</div>
-	</div>
+	</nav>
 </div>
 <?php
-	if(!isset($_POST['player_color'])){
-		?>
-	<script>
-			$(document).ready(function(){
-			  // Show the Modal on load
-			  $("#myModal").modal("show");
-			});
-	</script>
-		<?php
-	}
-	else{
-		$player_color = $_POST['player_color'];
-		$_SESSION['player_color'] = $player_color;
-		$_SESSION['moves'] = (int)$_POST['moves']+1;
-		$_SESSION['money'] = 50;
-		$_SESSION['message'] = "";
-		$_SESSION['property_buy'] = [];
-		$_SESSION['score'] = "";
-		$_SESSION['game_end_message'] = "";
-		include ('game_table_refresh.php');
-	}
-	if (!empty($_SESSION['player_color'])) {
-		header("Location: ../game.php");
+	if (isset($_POST['submit'])) {
+		if(!is_string($_POST['player_color']) && !is_int($_POST['moves'])){
+			$error = "Please fill all fields";
+		}
+		else{
+			$moves = filter_var($_POST['moves'], FILTER_SANITIZE_NUMBER_INT);
+			$player_color = htmlspecialchars($_POST['player_color']);
+			if (empty($moves)) {
+				header("Location: game_start.php");
+			}
+
+			$_SESSION['player_color'] = $player_color;
+			$_SESSION['moves'] = $moves;
+			$_SESSION['money'] = 50;
+			$_SESSION['message'] = "";
+			$_SESSION['property_buy'] = [];
+			$_SESSION['score'] = "";
+			$_SESSION['game_end_message'] = "";
+			include ('game_table_refresh.php');
+		}
+		if (!empty($_SESSION['player_color'])) {
+			header("Location: ../game.php");
+		}
 	}

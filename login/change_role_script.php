@@ -1,6 +1,11 @@
 <?php 
 include ('../includes/db_connect.php');
-
+if ($_SESSION['loggedin'] != true) {
+	header("Location: login.php");
+}
+if ($_SESSION['role'] != 'admin') {
+	header("Location: profile.php");
+}
 if (isset($_POST['submit'])) {
 	if (is_numeric($_POST['user_id']) && is_numeric($_POST['new_role'])) {
 		$user_id_from_post = filter_var($_POST['user_id'], FILTER_SANITIZE_NUMBER_INT);

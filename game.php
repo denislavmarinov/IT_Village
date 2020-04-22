@@ -1,50 +1,111 @@
 <?php
 include ('includes/header.php');
+include ('includes/db_connect.php');
 // Head variables
 $link = "img/logo_1.jpg";
 $title = "Game page";
+if ($_SESSION["loggedin"] != true) {
+	header("Location: login/login.php");
+}
+// Check if moves is not set
+if (!isset($_SESSION['moves'])) {
+	header ("Location: functions/game_start.php");
+}
+//Check if  player color is not set
+if (!isset($_SESSION['player_color'])) {
+	header ("Location: functions/game_start.php");
+}
 //Game variables
+
 $player_color = $_SESSION['player_color'];
 $colors = [];
 $possitions = [];
 $colors = $_SESSION['colors'];
 $possitions = $_SESSION['possitions'];
-// CHeck fi moves is set
-if (!isset($_SESSION['moves'])) {
-	header ("Location: functions/game_start.php");
-}
+
 if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
 	echo '<style>#dice{display: none;} #game_stats{display: none;} #dice_image{display: none;}</style>';
 	unset($_SESSION['player_color']);
 	?>
-	<table style="background: #fff" class="table table-striped">
-				<thead>
-					<tr>
-						<th>Пари</th>
-						<th>Причина за свършване на играта</th>
-						<th>Купени мотели</th>
-						<th>Общ брой мотели </th>
-						<th>Победа / Загуба</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><?= $_SESSION['money']?></td>
-						<td><?= $_SESSION['game_end_message']?></td>
-						<td><?= count($_SESSION['property_buy'])?> бр.</td>
-						<td>3 бр.</td>
-						<td>
-						<?php
-						if ($_SESSION['score'] == "win") {
-							echo "<span style='color: #0f0; font-weight: bold; '>Победа</span>";
-						}else{
-							echo "<span style='color: #f00; font-weight: bold; '>Загуба</span>";
-						}
-						?>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	<table id="game_end_table" style="background: #fff" class="table table-striped">
+		<thead>
+			<tr>
+				<th>Money</th>
+				<th>Game end reason</th>
+				<th>Motels bought</th>
+				<th>Count all motels</th>
+				<th>Win / Loss</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?= $_SESSION['money']?></td>
+				<td><?= $_SESSION['game_end_message']?></td>
+				<td><?= count($_SESSION['property_buy'])?> psc.</td>
+				<td>3 psc.</td>
+				<td>
+				<?php
+				if ($_SESSION['score'] == "win") {
+					echo "<span style='color: #0f0; font-weight: bold; '>Win</span>";
+				}else{
+					echo "<span style='color: #f00; font-weight: bold; '>Loss</span>";
+				}
+				?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<?php
+	$query = "SELECT `user_id` FROM `results`";
+	$result = mysqli_query($conn, $query);
+	$num = 1;
+	$user_ids = [];
+
+	while ($row = mysqli_fetch_assoc($result)){
+		$user_ids[$num] = $row['user_id'];
+		$num++;
+	}
+	for ($l = 1; $l <= count($user_ids); $l++) {
+		if ($user_ids[$l] == $_SESSION['user_id']) {
+			$have_result_account = true;
+		}
+		else{
+			$have_result_account = false;
+		}
+	}
+	// If this game is the first user game add it's account into result database table
+	if ($have_result_account == false) {
+		$query = "INSERT INTO `results`(`user_id`, `wins`, `losses`) VALUES ('".$_SESSION['user_id']."', 0, 0)";
+
+		$result = mysqli_query($conn, $query);
+	}
+	//Check if user win or loss and add the query needed
+	if ($_SESSION['score'] == "win") {
+		$query = "SELECT `wins` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."'";
+		$game_end = "wins";
+	}
+	else{
+		$query = "SELECT `losses` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."'";
+		$game_end = "losses";
+	}
+
+	$result = mysqli_query($conn, $query);
+
+	$db_score_arr = mysqli_fetch_assoc($result);
+	var_dump($db_score_arr);
+	$db_score = $db_score_arr[$game_end];
+	$db_score++;
+
+	if ($_SESSION['score'] == "win") {
+		$query = "UPDATE `results` SET `wins` = '".$db_score."' WHERE `user_id` = '".$_SESSION['user_id']."'";
+	}
+	else{
+		$query = "UPDATE `results` SET `losses` = '".$db_score."' WHERE `user_id` = '".$_SESSION['user_id']."'";
+	}
+	$result = mysqli_query($conn, $query);
+	?>
+	<a href="login/profile.php" class="btn btn-outline-secondary">Go back to profile</a>
+	<a href="functions/game_start.php" class="btn btn-outline-secondary">Play again</a>
 	<?php
 
 }
@@ -94,22 +155,13 @@ include ("functions/functions.php");
 		</div>
 	</div>
 	<div>
-<?php
-	if(!empty($_POST['dice_row'])){
-		unset($_POST['dice_row']);
-		dice_execude_moves($colors);
-		;
-		possition_actions($colors, $possitions, $_SESSION['moves'], $_SESSION['money'], $_SESSION['message'], $_SESSION['property_buy'], $_SESSION['score']);
-		game_end($_SESSION['money'], $_SESSION['property_buy'], $_SESSION['moves']);
-	}
-?>
-		<form action="#" method="post" id="dice">
+		<form action="game_script.php" method="post" id="dice">
 			<input type="submit" name="dice_row" value="Хвърли зар">
-			<input type="hidden" name="moves" value="<?php  $_SESSION['moves']--; echo $_SESSION['moves']?>">
+			<!-- <input type="hidden" name="moves" value="--><?php  //$_SESSION['moves']--; echo $_SESSION['moves']?><!--"> -->
 		</form>
 		<div class="row">
 			<div id="dice_image" class="col-md-4 offset-md-4">
-				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="Dice:  <?=$_SESSION['dice']?>"></p>
+				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="<?=$_SESSION['dice']?>"></p>
 			</div>
 
 			<div id="game_stats" class="col-md-4 offset-md-8">
