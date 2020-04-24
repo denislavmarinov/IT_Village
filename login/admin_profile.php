@@ -5,11 +5,11 @@ if (!isset($_SESSION['profile_key'])) {
 ?>
 
 <ul>
-	<li><a href="" class="btn btn-outline-secondary">Profile</a></li>
-	<li><a href="" class="btn btn-outline-secondary">Play a game</a></li>
-	<li><a href="" class="btn btn-outline-secondary">Statistics</a></li>
-	<li><a href="" class="btn btn-outline-secondary">Change user role</a></li>
-	<li><a href="" class="btn btn-outline-secondary">Roles</a></li>
-	<li><a href="" class="btn btn-outline-secondary">Change password</a></li>
-	<li><a href="" class="btn btn-outline-secondary">Log out</a></li>
+	<li><a href="#" class="btn btn-outline-secondary">Profile</a></li>
+	<li><a href="../functions/game_start.php" class="btn btn-outline-secondary">Play a game</a></li>
+	<li><a href="statistics.php" class="btn btn-outline-secondary">Statistics</a></li>
+	<li><a href="change_role.php" class="btn btn-outline-secondary">Change user role</a></li>
+	<li><a href="roles.php" class="btn btn-outline-secondary">Roles</a></li>
+	<li><a href="change_password.php" class="btn btn-outline-secondary">Change password</a></li>
+	<li><a href="logout.php" class="btn btn-outline-secondary">Log out</a></li>
 </ul>
