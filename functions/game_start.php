@@ -3,7 +3,7 @@ $link = "../img/logo_1.jpg";
 $title = "Start game";
 include ('../includes/header.php');
 if ($_SESSION["loggedin"] != true) {
-	header("Location: login/login.php");
+	header("Location: ../login/login.php");
 }
 $player_color = "#fff";
 ?>

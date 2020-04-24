@@ -3,11 +3,13 @@ if (!isset($_SESSION['profile_key'])) {
 	header("Location: profile.php");
 }
 ?>
+
 <ul>
-	<li><a class="btn btn-outline-success" href="profile.php">profile</a></li>
-	<li><a class="btn btn-outline-secondary" href="statistcs.php">statistcs</a></li>
-	<li><a class="btn btn-outline-secondary" href="change_role.php">change role</a></li>
-	<li><a class="btn btn-outline-warning" href="change_password.php">change_password</a></li>
-	<li><a class="btn btn-outline-danger" href="logout.php">logout</a></li>
-	<li><a class="btn btn-outline-danger" href="delete_account.php">delete_account</a></li>
+	<li><a href="" class="btn btn-outline-secondary">Profile</a></li>
+	<li><a href="" class="btn btn-outline-secondary">Play a game</a></li>
+	<li><a href="" class="btn btn-outline-secondary">Statistics</a></li>
+	<li><a href="" class="btn btn-outline-secondary">Change user role</a></li>
+	<li><a href="" class="btn btn-outline-secondary">Roles</a></li>
+	<li><a href="" class="btn btn-outline-secondary">Change password</a></li>
+	<li><a href="" class="btn btn-outline-secondary">Log out</a></li>
 </ul>
