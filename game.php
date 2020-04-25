@@ -1,9 +1,7 @@
 <?php
 include ('includes/header.php');
 include ('includes/db_connect.php');
-// Head variables
-$link = "img/logo_1.jpg";
-$title = "Game page";
+
 if ($_SESSION["loggedin"] != true) {
 	header("Location: login/login.php");
 }

@@ -1,6 +1,4 @@
 <?php
-$link = "../img/logo_1.jpg";
-$title = "Login";
 $error = "";
 include '../includes/db_connect.php';
 include '../includes/header.php';
