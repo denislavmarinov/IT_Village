@@ -1,7 +1,8 @@
 <?php
-$error = "";
 include '../includes/db_connect.php';
 include '../includes/header.php';
+<<<<<<< Updated upstream
+=======
 ?><!-- Registration form -->
 <div class="container">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
@@ -50,12 +51,36 @@ $password_secure = mysqli_real_escape_string($conn, $password);
 $password_hashed = md5($password_secure);
 $password_query = "INSERT INTO `passwords`(`user_id`, `password`) VALUES ('".$user_id."','". $password_hashed ."')"; 
 $password_result = mysqli_query($conn, $password_query);
-header("Location: login.php");
+//insert data in result db table
+$query = "INSERT INTO `results`(`user_id`) VALUES ('".$user_id."')";
+
+$result = mysqli_query($conn, $query);
+
+if (empty($error)) {
+  header("Location: login.php");  
+}
 
   } else {
     $error = "Please fill all fields";
   }
 }
+>>>>>>> Stashed changes
 ?>
-<div class="text-warning"><p class="error"><?=$error?></p></div>
-</div>
+<form class="form-inline">
+  <div class="form-group">
+      <label class="sr-only" for="exampleInputEmail3">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+  </div>
+  <div class="form-group">
+      <label class="sr-only" for="exampleInputPassword3">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+    </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox">Remember me
+    </label>
+  </div>
+    <button type="submit" class="btn btn-secondary">Регистрирай се</button>
+<a class="text-warning" href="../functions/game_start.php"></a>
+</form>
+ 
