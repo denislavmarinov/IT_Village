@@ -1,6 +1,4 @@
 <?php 
-$link = "../img/logo_1.jpg";
-$title = "Change role";
 include ('../includes/header.php');
 include ('../includes/db_connect.php');
 if ($_SESSION['loggedin'] != true) {

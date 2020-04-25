@@ -1,6 +1,4 @@
 <?php
-    $link = "img/logo_1.jpg";
-    $title = "Base page";
     include 'includes/header.php';
 ?>
     <main class="container">
