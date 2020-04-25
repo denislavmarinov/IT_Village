@@ -1,8 +1,6 @@
 <?php
 include '../includes/db_connect.php';
 include '../includes/header.php';
-<<<<<<< Updated upstream
-=======
 ?><!-- Registration form -->
 <div class="container">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
@@ -64,7 +62,6 @@ if (empty($error)) {
     $error = "Please fill all fields";
   }
 }
->>>>>>> Stashed changes
 ?>
 <form class="form-inline">
   <div class="form-group">
