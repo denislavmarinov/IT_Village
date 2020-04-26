@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
 		die("Error" . mysqli_error($conn));
 	}
 	else{
-		header("Location: profile.php");
+		header("Location: change_role.php");
 	}
 }
 

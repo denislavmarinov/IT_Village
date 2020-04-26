@@ -155,11 +155,12 @@ include ("functions/functions.php");
 	<div>
 		<form action="game_script.php" method="post" id="dice">
 			<input type="submit" name="dice_row" value="Хвърли зар">
-			<!-- <input type="hidden" name="moves" value="--><?php  //$_SESSION['moves']--; echo $_SESSION['moves']?><!--"> -->
 		</form>
 		<div class="row">
 			<div id="dice_image" class="col-md-4 offset-md-4">
+				<?php if (isset($_SESSION['dice'])) { ?>
 				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="<?=$_SESSION['dice']?>"></p>
+				<?php } ?>
 			</div>
 
 			<div id="game_stats" class="col-md-4 offset-md-8">
