@@ -71,7 +71,4 @@ if($result_update) {
   header("Location: profile.php");
 }
 }
-
-
-
 include '../includes/footer.php';
