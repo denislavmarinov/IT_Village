@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <?php
 $error = "";
 include '../includes/db_connect.php';
@@ -147,4 +146,3 @@ if (empty($error)) {
 <?php 
 
 include '../includes/footer.php';
->>>>>>> Stashed changes
