@@ -1,16 +1,18 @@
 <?php
-$link = "../img/logo_1.jpg";
-$title = "Change password";
 $error = "";
 include '../includes/db_connect.php';
 include '../includes/header.php';
+
+if ($_SESSION['loggedin'] != true) {
+  header("Location: login.php");
+}
 ?>
 <!-- Change password -->
 
 <div class="container">
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
-	<a class="navbar-brand" href="../index.php">
-    <img id="img" src="../img/picture_backgraund_1.jpg" alt="picture_backgraund_1" style="width: 350px;">
+	<a class="navbar-brand" href="profile.php">
+    <img id="img" src="../img/picture_background.jpg" alt="Go back to your profile" style="width: 350px;">
     <p>Home</p></a>
 <div class="container">
 	<h4 class="text-warning">Ch@nge p@ssword</h4>
@@ -63,11 +65,13 @@ if($new_password == $rep_new_password) {
 } else {
   $error = "New password does not match!";
 }
-
-}
-
 $update = "UPDATE `passwords` SET `password`='".$db_password_new."' WHERE user_id = '".$_SESSION['user_id']."'";
 $result_update = mysqli_query($conn, $update);
 if($result_update) {
-  echo "Success!";
+  header("Location: profile.php");
 }
+}
+
+
+
+include '../includes/footer.php';

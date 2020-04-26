@@ -1,0 +1,6 @@
+Options +Indexes
+
+AuthType basic
+AuthName "prompt"
+AuthUserFile ../htdocs/Vratsa_Software_School/Module_2/Project/IT_Village/.htpasswd
+Require valid-user

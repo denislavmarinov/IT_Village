@@ -1,9 +1,12 @@
 <?php
-$link = "../img/logo_1.jpg";
-$title = "Login";
 $error = "";
 include '../includes/db_connect.php';
 include '../includes/header.php';
+if (isset($_SESSION['loggedin'])) {
+  if ($_SESSION['loggedin'] ==  true) {
+    header("Location: profile.php");
+  }
+}
 ?>
 <!-- Login form -->
 
@@ -31,8 +34,8 @@ include '../includes/header.php';
     <input type="submit" name="submit" class="btn btn-danger" id="login" value="JOIN to game"> 
   </form>
 </div>
-</div>
 </nav>
+</div>
 
 <?php
 $loggedin = NULL;
@@ -65,7 +68,8 @@ if( isset($_POST['submit'])){
   else {
     $corect_password = FALSE;
   }
-  if($corect_email == TRUE && $corect_password == TRUE){  $_SESSION["loggedin"] = true;
+  if($corect_email == TRUE && $corect_password == TRUE){  
+      $_SESSION["loggedin"] = true;
       $_SESSION["user_id"] = $user_id_db;
       $_SESSION["username"] = $acount;
       header("Location: profile.php"); 
@@ -74,4 +78,4 @@ if( isset($_POST['submit'])){
 }
 }
 
-?>  
+include '../includes/footer.php';

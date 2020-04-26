@@ -15,6 +15,8 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
   <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+  <!-- Font Awesome 5 -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <link rel="stylesheet" type="text/css" href="../style/inner_style.css">
       <style>
         body {

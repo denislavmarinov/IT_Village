@@ -1,28 +1,120 @@
 <?php
 include ('includes/header.php');
-if ((int)$_SESSION['moves'] <= 1 && isset($_SESSION['moves'])) {
-	unset($_SESSION['player_color']);
-	unset($_SESSION['moves']);
-	unset($_SESSION);
-	header('Location: functions/game_start.php');
+include ('includes/db_connect.php');
+
+if ($_SESSION["loggedin"] != true) {
+	header("Location: login/login.php");
 }
-include ("functions/functions.php");
+// Check if moves is not set
+if (!isset($_SESSION['moves'])) {
+	header ("Location: functions/game_start.php");
+}
+//Check if  player color is not set
+if (!isset($_SESSION['player_color'])) {
+	header ("Location: functions/game_start.php");
+}
+//Game variables
+
 $player_color = $_SESSION['player_color'];
 $colors = [];
 $possitions = [];
 $colors = $_SESSION['colors'];
 $possitions = $_SESSION['possitions'];
-$money = 50;
-$message = NULL;
-$score = NULL;
-$property_buy = [];
-$return_elements = $_SESSION['return_elements'];
+
+if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
+	echo '<style>#dice{display: none;} #game_stats{display: none;} #dice_image{display: none;}</style>';
+	unset($_SESSION['player_color']);
+	?>
+	<table id="game_end_table" style="background: #fff" class="table table-striped">
+		<thead>
+			<tr>
+				<th>Money</th>
+				<th>Game end reason</th>
+				<th>Motels bought</th>
+				<th>Count all motels</th>
+				<th>Win / Loss</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?= $_SESSION['money']?></td>
+				<td><?= $_SESSION['game_end_message']?></td>
+				<td><?= count($_SESSION['property_buy'])?> psc.</td>
+				<td>3 psc.</td>
+				<td>
+				<?php
+				if ($_SESSION['score'] == "win") {
+					echo "<span style='color: #0f0; font-weight: bold; '>Win</span>";
+				}else{
+					echo "<span style='color: #f00; font-weight: bold; '>Loss</span>";
+				}
+				?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<?php
+	$query = "SELECT `user_id` FROM `results`";
+	$result = mysqli_query($conn, $query);
+	$num = 1;
+	$user_ids = [];
+
+	while ($row = mysqli_fetch_assoc($result)){
+		$user_ids[$num] = $row['user_id'];
+		$num++;
+	}
+	for ($l = 1; $l <= count($user_ids); $l++) {
+		if ($user_ids[$l] == $_SESSION['user_id']) {
+			$have_result_account = true;
+		}
+		else{
+			$have_result_account = false;
+		}
+	}
+	// If this game is the first user game add it's account into result database table
+	if ($have_result_account == false) {
+		$query = "INSERT INTO `results`(`user_id`, `wins`, `losses`) VALUES ('".$_SESSION['user_id']."', 0, 0)";
+
+		$result = mysqli_query($conn, $query);
+	}
+	//Check if user win or loss and add the query needed
+	if ($_SESSION['score'] == "win") {
+		$query = "SELECT `wins` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."'";
+		$game_end = "wins";
+	}
+	else{
+		$query = "SELECT `losses` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."'";
+		$game_end = "losses";
+	}
+
+	$result = mysqli_query($conn, $query);
+
+	$db_score_arr = mysqli_fetch_assoc($result);
+	var_dump($db_score_arr);
+	$db_score = $db_score_arr[$game_end];
+	$db_score++;
+
+	if ($_SESSION['score'] == "win") {
+		$query = "UPDATE `results` SET `wins` = '".$db_score."' WHERE `user_id` = '".$_SESSION['user_id']."'";
+	}
+	else{
+		$query = "UPDATE `results` SET `losses` = '".$db_score."' WHERE `user_id` = '".$_SESSION['user_id']."'";
+	}
+	$result = mysqli_query($conn, $query);
+	?>
+	<a href="login/profile.php" class="btn btn-outline-secondary">Go back to profile</a>
+	<a href="functions/game_start.php" class="btn btn-outline-secondary">Play again</a>
+	<?php
+
+}
+include ("functions/functions.php");
+
 ?>
 	<div class="container">
-		<div class="col-8-lg offset-2">
+		<div class="col-4 offset-4">
 
 			<svg width="200" height="200">
-				<rect  x="0" y="0" width="50" height="50" style="fill: <?= $colors[0] ?>; stroke: black"><</rect>
+				<rect  x="0" y="0" width="50" height="50" style="fill: <?= $colors[0] ?>; stroke: black"></rect>
 				<text x="15" y="37.5" font-family="Verdana" font-size="35" fill="blue"><?= $possitions[0] ?></text>
 				<!-- New Block -->
 				<rect x="50" y="0" width="50" height="50" style="fill: <?= $colors[1] ?>; stroke: black"></rect>
@@ -61,36 +153,24 @@ $return_elements = $_SESSION['return_elements'];
 		</div>
 	</div>
 	<div>
-		<form action="#" method="post">
+		<form action="game_script.php" method="post" id="dice">
 			<input type="submit" name="dice_row" value="Хвърли зар">
-			<input type="hidden" name="moves" value="<?php  $_SESSION['moves']--; echo $_SESSION['moves']?>">
 		</form>
 		<div class="row">
-			<div class="col-md-4 offset-md-4">
-				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="Dice:  <?=$_SESSION['dice']?>"></p>
+			<div id="dice_image" class="col-md-4 offset-md-4">
+				<?php if (isset($_SESSION['dice'])) { ?>
+				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="<?=$_SESSION['dice']?>"></p>
+				<?php } ?>
 			</div>
 
-			<div class="col-md-4 offset-md-8">
-				<p><?php var_dump($return_elements)?></p>
+			<div id="game_stats" class="col-md-4 offset-md-8">
+				<p>Game message:</p>
+				<p class="alert alert-info"><?= $_SESSION['message'] ?></p>
 				<p>You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
-				<p>Your money:  <b><?= $_SESSION['return_elements'['money']] ?></b></p>
-				<p>Game message: <b><?= $_SESSION['return_elements'['message']] ?></b></p>
-				<p>Property buy: <b><?php print_r($_SESSION['property_buy']) ?></b></p>
-				<p>Win or loss:  <b><?= $_SESSION['return_elements'['score']] ?></b></p>
-
+				<p>Your money:  <b><?= $_SESSION['money'] ?></b></p>
+				<p>Property buy: <b><?php echo count($_SESSION['property_buy']) ?></b></p>
 			</div>
 		</div>
 	</div>
 <?php
-	if(!empty($_POST['dice_row'])){
-		unset($_POST['dice_row']);
-		dice_execude_moves($colors);
-		;
-		var_dump(possition_actions($colors, $possitions, $_SESSION['moves'], $_SESSION['money'], $_SESSION['message'], $_SESSION['property_buy'], $_SESSION['score'], $return_elements));
-		// $return_elements = $_SESSION['return_elements'];
-		// $money = $return_elements['money'];
-		// $message = $return_elements['message'];
-		// $property_buy = $return_elements['property_buy'];
-		// $score = $return_elements['score'];
-	}
 include ('includes/footer.php');

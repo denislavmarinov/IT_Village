@@ -1,6 +1,12 @@
 <?php 
 include ('../includes/header.php');
 include ('../includes/db_connect.php');
+if ($_SESSION['loggedin'] != true) {
+	header("Location: login.php");
+}
+if ($_SESSION['role'] != 'admin') {
+	header("Location: profile.php");
+}
 
 $query = "SELECT `role_id`, `role_name` FROM `roles`";
 
@@ -24,7 +30,8 @@ $result = mysqli_query($conn, $query);
 // 	die("Error" . mysqli_error($conn));
 // }
 ?>
-
+<a href="profile.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to your profile</a>
+<p></p>
 <table class="table table-striped" style="background-color: #fff;">
 	<thead>
 		<tr>
