@@ -60,3 +60,5 @@ $player_color = "#fff";
 			header("Location: ../game.php");
 		}
 	}
+
+	include '../includes/footer.php';

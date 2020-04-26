@@ -12,14 +12,15 @@ $query = "SELECT r.`role_name` FROM roles r JOIN `users` u ON r.`role_id` = u.`r
 
 $result = mysqli_query($conn, $query);
 
-$user_role = mysqli_fetch_assoc($result);
+$user_role_arr = mysqli_fetch_assoc($result);
+$user_role = $user_role_arr['role_name'];
 
 $_SESSION['role'] = $user_role;
 
-if($user_role == "user"){
-	include ("user_profile.php");
-}else{
+if($user_role == "admin"){
 	include ("admin_profile.php");
+}else{
+	include ("user_profile.php");
 }
 
 include("../includes/footer.php");

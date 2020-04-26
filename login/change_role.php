@@ -30,7 +30,8 @@ $result = mysqli_query($conn, $query);
 // 	die("Error" . mysqli_error($conn));
 // }
 ?>
-
+<a href="profile.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to your profile</a>
+<p></p>
 <table class="table table-striped" style="background-color: #fff;">
 	<thead>
 		<tr>
