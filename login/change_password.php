@@ -11,7 +11,7 @@ if ($_SESSION['loggedin'] != true) {
 
 <div class="container">
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
-	<a class="navbar-brand" href=".profile.php">
+	<a class="navbar-brand" href="profile.php">
     <img id="img" src="../img/picture_background.jpg" alt="Go back to your profile" style="width: 350px;">
     <p>Home</p></a>
 <div class="container">
