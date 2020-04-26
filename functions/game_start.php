@@ -30,7 +30,7 @@ $player_color = "#fff";
 						<option value="pink">Pink</option>
 					</select>
 				</div>
-				<input class="btn btn-success" type="submit" name="submit">
+				<input class="btn btn-primary" id="registration_form" type="submit" name="submit">
 			</form>
 		</div>
 	</nav>
