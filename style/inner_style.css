@@ -28,9 +28,9 @@ select option[value='pink']{
 .user_image{
 	float: right;
     border: solid 25px #787878;
-    width: 350px;
-    height: 400px;
+	width: auto;
     margin-top: 50px;
+    margin-right: 30px;
 }
 * {box-sizing: border-box;}
 
@@ -54,6 +54,7 @@ body {
   font-size: 18px; 
   line-height: 25px;
   border-radius: 4px;
+  margin: 2.5px;
 }
 
 .header a.logo {
@@ -89,4 +90,11 @@ body {
 #image_upload{
 	padding: 15px;
 	margin: 15px;
+}
+#change_delete_image_btn_group{
+	margin: 25px;
+	float: right;
+}
+.change_delete_image_btn{
+	margin: 5px;
 }

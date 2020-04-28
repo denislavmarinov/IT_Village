@@ -54,36 +54,13 @@ if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
 		</tbody>
 	</table>
 	<?php
-	$query = "SELECT `user_id` FROM `results`";
-	$result = mysqli_query($conn, $query);
-	$num = 1;
-	$user_ids = [];
-
-	while ($row = mysqli_fetch_assoc($result)){
-		$user_ids[$num] = $row['user_id'];
-		$num++;
-	}
-	for ($l = 1; $l <= count($user_ids); $l++) {
-		if ($user_ids[$l] == $_SESSION['user_id']) {
-			$have_result_account = true;
-		}
-		else{
-			$have_result_account = false;
-		}
-	}
-	// If this game is the first user game add it's account into result database table
-	if ($have_result_account == false) {
-		$query = "INSERT INTO `results`(`user_id`, `wins`, `losses`) VALUES ('".$_SESSION['user_id']."', 0, 0)";
-
-		$result = mysqli_query($conn, $query);
-	}
 	//Check if user win or loss and add the query needed
 	if ($_SESSION['score'] == "win") {
-		$query = "SELECT `wins` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."'";
+		$query = "SELECT `wins` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."' LIMIT 1";
 		$game_end = "wins";
 	}
 	else{
-		$query = "SELECT `losses` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."'";
+		$query = "SELECT `losses` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."' LIMIT 1";
 		$game_end = "losses";
 	}
 

@@ -33,17 +33,33 @@ echo "<div class='user_image'>";
 if ($have_image_arr['have_image_or_not'] == "YES") {
 	$user_image = $have_image_arr['user_image'];
 	?>
-	<img src="../uploads/<?=$user_image ?>" alt="Your image" widht="50px" height="100px">
+	<img src="../user_photos/<?=$user_image ?>" alt="Your image" style="min-width: 150px; max-width: 350px;">
+</div>
+<div class="btn-group-vertical" id="change_delete_image_btn_group">
+	<a class="btn btn-outline-info" class="change_delete_image_btn" href="update_user_image.php">Update you photo</a>
+	<a class="btn btn-outline-danger" class="change_delete_image_btn" href="delete_user_image.php">Delete you photo</a>
+</div>
 	<?php
 }else{
 ?>
-<form action="upload_image.php" method="post" class="form-group" id="image_upload">
+<form action="upload_image.php" method="post" class="form-group" id="image_upload" enctype="multipart/form-data">
 	<input type="file" name="user_image" class="form-control" style="width: 250px !important;">
 	<p></p>
 	<input type="submit" name="submit" value="Upload the file" class="btn btn-outline-info">
 
 </form>
-<?php } ?>
 </div>
-<?php
+<?php 
+}
+
+if (isset($_SESSION['user_errors'])) {
+	if ($_SESSION['user_errors'] != false) {
+		?>
+		<p class="text-white" style="font-size: 25px; float: right;"><?= $_SESSION['user_errors'] ?></p>
+		<?php
+	}
+}
+
+
+
 include("../includes/footer.php");
