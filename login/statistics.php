@@ -86,7 +86,7 @@ if (isset($sort)) {
 	}
 }
 
-var_dump($query);
+// var_dump($query);
 $result = mysqli_query($conn, $query);
 
 if( mysqli_num_rows($result) > 0 ){

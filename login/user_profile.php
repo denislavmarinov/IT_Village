@@ -4,10 +4,12 @@ if (!isset($_SESSION['profile_key'])) {
 }
 ?>
 
-<ul>
-	<li><a href="profile.php" class="btn btn-outline-secondary">Profile</a></li>
-	<li><a href="../functions/game_start.php" class="btn btn-outline-secondary">Play a game</a></li>
-	<li><a href="statistics.php" class="btn btn-outline-secondary">Statistics</a></li>
-	<li><a href="change_password.php" class="btn btn-outline-secondary">Change password</a></li>
-	<li><a href="logout.php" class="btn btn-outline-secondary">Log out</a></li>
-</ul>
+<div class="header">
+  <a href="../index.php" class="logo">IT Village</a>
+  <div class="header-right">
+    <a href="../functions/game_start.php" >Play a game</a>
+	<a href="statistics.php">Statistics</a>
+	<a href="change_password.php">Change password</a>
+	<a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+  </div>
+</div>
