@@ -12,6 +12,10 @@ if(!empty( $_FILES )){
 
 	if( !empty( $_FILES['user_image'] ) ){
 
+		if (!file_exists('../user_photos/'. $_SESSION['username'])) {
+			mkdir("../user_photos/". $_SESSION['username']);
+		}
+
 		if ($_FILES['user_image']['size'] > 4000000) { 
        		die('upload file up to 4Mb');
    		 } 
@@ -38,9 +42,11 @@ if(!empty( $_FILES )){
 		}
 
 		if ($error == false) {
-			$uploaddir = '../user_photos/';
-			$uploadfile = $uploaddir . date("d_m_y") . "_". time() . "_" . basename($_FILES['user_image']['name']);
-			$filename = date("d_m_y") . "_". time() . "_" . basename($_FILES['user_image']['name']);
+			$uploaddir = '../user_photos/'. $_SESSION['username'] . '/';
+			$rand = rand();
+			$uploadfile = $uploaddir . date("d_m_y") . "_". $rand . "_" . basename($_FILES['user_image']['name']);
+
+			$filename = date("d_m_y") . "_". $rand . "_" . basename($_FILES['user_image']['name']);
 
 			//  validate file input
 			if (move_uploaded_file($_FILES['user_image']['tmp_name'], $uploadfile)) {

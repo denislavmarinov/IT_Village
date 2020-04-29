@@ -67,7 +67,7 @@ if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
 	$result = mysqli_query($conn, $query);
 
 	$db_score_arr = mysqli_fetch_assoc($result);
-	var_dump($db_score_arr);
+	// var_dump($db_score_arr);
 	$db_score = $db_score_arr[$game_end];
 	$db_score++;
 

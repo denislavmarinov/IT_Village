@@ -51,7 +51,8 @@ while ($row = mysqli_fetch_assoc($result)) {
 		<td>
 			<?php 
 				if ($count_roles[$row['role_name']] != NULL){
-					echo $count_roles[$row['role_name']];
+					$roles_sum[$num] =  $count_roles[$row['role_name']];
+					echo $roles_sum[$num];
 				} 
 				else{
 					echo '0';
@@ -65,7 +66,13 @@ while ($row = mysqli_fetch_assoc($result)) {
 ?>
 <tr>
 	<td colspan="3">Sum of the users</td>
-	<td><?php echo array_count_values($count_roles)[1]; ?></td>
+	<?php 
+	$sum = 0;
+	for ($i = 1; $i <= count($roles_sum); $i++) {
+		$sum += $roles_sum[$i];
+	}
+	?>
+	<td><?= $sum ?></td>
 </tr>
 </table>
 

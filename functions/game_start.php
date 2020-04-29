@@ -10,7 +10,7 @@ $player_color = "#fff";
 	<a class="navbar-brand" href="../index.php">
 	<img id="img" src="../img/logo_1.jpg" alt="logo" style="width: 150px;"><p>Home</p></a>
 		<div class="container">
-		<h4 class="text-warning">JOIN to g@me IT Vill@ge</h4>
+		<h4 class="text-warning">START playing a game</h4>
 			<form action="#" method="post" class="">
 				<div class="form-group">
 					<label for="moves" class="text-warning">How much moves will you have?</label>
