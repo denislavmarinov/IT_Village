@@ -7,10 +7,10 @@ $player_color = "#fff";
 ?>
 <div class="container">
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
-	<a class="navbar-brand" href="../index.php">
-	<img id="img" src="../img/logo_1.jpg" alt="logo" style="width: 150px;"><p>Home</p></a>
+	<a class="navbar-brand" href="../login/profile.php">
+	<img id="img" src="../img/picture_background.jpg" alt="logo" style="width: 350px;"></a>
 		<div class="container">
-		<h4 class="text-warning">START playing a game</h4>
+		<h4 class="text-warning">ST@RT pl@ying @ g@me</h4>
 			<form action="#" method="post" class="">
 				<div class="form-group">
 					<label for="moves" class="text-warning">How much moves will you have?</label>
@@ -53,6 +53,7 @@ $player_color = "#fff";
 			$_SESSION['message'] = "";
 			$_SESSION['property_buy'] = [];
 			$_SESSION['score'] = "";
+			$_SESSION['dice'] = NULL;
 			$_SESSION['game_end_message'] = "";
 			include ('game_table_refresh.php');
 		}

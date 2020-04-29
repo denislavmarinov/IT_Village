@@ -39,7 +39,7 @@ if ($have_image_arr == "YES") {
 	<img src="../user_photos/<?= $_SESSION['username'] ?>/<?=$user_image ?>" alt="Your image" style="min-width: 150px; max-width: 350px;">
 </div>
 <div class="btn-group-vertical" id="change_delete_image_btn_group">
-	<a class="btn btn-outline-info" class="change_delete_image_btn" href="update_user_image.php">Update you photo</a>
+	<a class="btn btn-outline-info" class="change_delete_image_btn" href="update_user_image.php" style="margin-top: 50%">Update you photo</a><p></p>
 	<a class="btn btn-outline-danger" class="change_delete_image_btn" href="delete_user_image.php">Delete you photo</a>
 </div>
 	<?php
@@ -58,7 +58,7 @@ if ($have_image_arr == "YES") {
 if (isset($_SESSION['user_errors'])) {
 	if ($_SESSION['user_errors'] != false) {
 		?>
-		<p class="text-white" style="font-size: 25px; float: right;"><?= $_SESSION['user_errors'] ?></p>
+		<p class="text-danger" style="font-size: 25px; float: right;"><?= $_SESSION['user_errors'] ?></p>
 		<?php
 	}
 }
@@ -71,23 +71,20 @@ if (isset($_SESSION['user_errors'])) {
 
 ?>
 <p class="text-white">You role in the app</p>
-<table class="table table-striped" style="margin: 25px; background-color: #fff; width: 500px;" >
+<table class="table table-striped" style="margin: 25px; width: 500px;" >
 	<thead>
 		<tr>
-			<th>#</th>
-			<th>Your role</th>
-			<th>Role description</th>
+			<th class="text-white">Your role</th>
+			<th class="text-white">Role description</th>
 		</tr>
 	</thead>
 	<tbody>
 			<?php
-			$num = 1;
 			while ($row = mysqli_fetch_assoc($result)) {
 			?>
 			<tr>
-				<td><?= $num++ ?></td>
-				<td><?= $row['role_name']?></td>
-				<td><?= $row['role_description'] ?></td>
+				<td class="text-white"><?= $row['role_name']?></td>
+				<td class="text-white"><?= $row['role_description'] ?></td>
 			</tr>
 		<?php }?>
 	</tbody>
@@ -99,28 +96,29 @@ $result = mysqli_query($conn, $query);
 ?>
 <p class="text-white">Statistic</p>
 <div class="row">
-		<table style="margin: 25px; background-color: #fff;" class="table table-striped">
-			<tr>
-				<td>#</td>
-				<td>Name</td>
-				<td>Wins</td>
-				<td>Losses</td>
-				<td>Game played</td>
-			</tr>
-			<?php
-			$num = 1;
-			while($row = mysqli_fetch_assoc($result)){
-				?>
-				<tr>					
-					<td><?= $num ++?></td>
-					<td><?= $_SESSION['username'] ?></td>	
-					<td><?php $wins = $row['wins']; echo $wins;?></td>
-		    		<td><?php $losses = $row['losses']; echo $losses;?></td>
-		    		<td><?php echo $wins + $losses?></td>	
+		<table style="margin: 25px;" class="table table-striped">
+			<thead>
+				<tr>
+					<th class="text-white">Name</th>
+					<th class="text-white">Wins</th>
+					<th class="text-white">Losses</th>
+					<th class="text-white">Game played</th>
 				</tr>
+			</thead>
+			<tbody>
 				<?php
-			}
-			?>
+				while($row = mysqli_fetch_assoc($result)){
+					?>
+					<tr>
+						<td class="text-white"><?= $_SESSION['username'] ?></td>	
+						<td class="text-white"><?php $wins = $row['wins']; if($wins > 0){ echo $wins;} else{echo 0; }?></td>
+			    		<td class="text-white"><?php $losses = $row['losses']; if($losses > 0){ echo $losses;} else{echo 0; }?></td>
+			    		<td class="text-white"><?php echo $wins + $losses?></td>	
+					</tr>
+					<?php
+				}
+				?>
+			</tbody>
 		</table>
 	</div>
 <?php
@@ -130,13 +128,13 @@ $result = mysqli_query($conn, $query);
 
 $wins = mysqli_fetch_assoc($result);
 
-
 $query = "SELECT SUM(`losses`) AS `sum_losses` FROM `results` WHERE `user_id` = '".$_SESSION['user_id']."'";
 
 $result = mysqli_query($conn, $query);
 
 $losses = mysqli_fetch_assoc($result);
 
+if ((int)$wins['sum_wins'] > 0 || (int)$losses['sum_losses'] > 0) {
 ?>
 <p class="text-white">Games played</p>
 <style>
@@ -192,4 +190,5 @@ $pie_chart_losses = $loss_percent * 424.17;
 	</div>
 </div>
 <?php
+}
 include("../includes/footer.php");

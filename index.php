@@ -1,10 +1,19 @@
 <?php
     include 'includes/header.php';
+
 ?>
     <main class="container">
-      <div class="relative">
-          <a class="btn btn-danger" id="login" href="login/login.php">Login</a>
-          <a class="btn btn-primary" id="registration_form" href="login/registration_form.php">Registration</a>
+      <div class="row" style="margin: auto !important; width: 50% !important;">
+        <?php 
+        if (isset($_SESSION['loggedin'])) {
+          ?>
+            <a class="btn btn-danger" id="login" href="login/profile.php">Profile</a>
+          <?php
+        }else{
+        ?>
+          <a class="btn btn-danger" id="login" href="login/login.php" style="margin: 10px; text-align: center">Login</a>
+          <a class="btn btn-primary" id="registration_form" href="login/registration_form.php" style="margin: 10px; text-align: center">Registration</a>
+        <?php } ?>
       </div>
    
         <section id="index_content" class="p-3 my-3 bg-dark text-white">

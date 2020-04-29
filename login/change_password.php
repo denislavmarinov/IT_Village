@@ -12,8 +12,7 @@ if ($_SESSION['loggedin'] != true) {
 <div class="container">
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
 	<a class="navbar-brand" href="profile.php">
-    <img id="img" src="../img/picture_background.jpg" alt="Go back to your profile" style="width: 350px;">
-    <p>Home</p></a>
+    <img id="img" src="../img/picture_background.jpg" alt="Go back to your profile" style="width: 350px;"></a>
 <div class="container">
 	<h4 class="text-warning">Ch@nge p@ssword</h4>
 <form action="#" method="Post">

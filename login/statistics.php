@@ -6,48 +6,9 @@ include('../includes/db_connect.php');
 if ($_SESSION['loggedin'] != true) {
 	header("Location: login.php");
 }
-if ( isset($_POST['search']) ) {
-	if( !empty( $_POST['search_string'])){
-		$search = htmlspecialchars($_POST['search_string']);
-	}
-}
+
 ?>
-<a href="profile.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to your profile</a>
-<div class="row">
-	<div class="col-md-6">
-		<form class="form-inline" action="#" method="post">
-			<div class="col-md-8">
-				<input type="text" name="search_string" class="form-control" value="<?php if(isset( $search )) { echo $search;} ?>" placeholder="Enter recipe name ...">
-			</div>
-			<div class="col-md-2">	
-				<input class="btn btn-outline-secondary text-white" type="submit" name="search" value="Search">
-			</div>
-			<div class="col-md-2">	
-				<a href="index.php" class="btn btn-warning">Clear SEARCH</a>
-			</div>	
-		</form>
-	</div>
-	<div class="col-md-6">
-		<form class="form-inline" action="#" method="post">
-			<div class="col-md-4">
-				<span class="text-white">Select the column to sort by:</span>
-				<select id="column" name="column" class="form-control">
-					<option value="1">Name</option>
-					<option value="2">Wins</option>
-					<option value="3">Losses</option>
-				</select>
-			</div>
-			<div class="col-md-4">
-				<span class="text-white">Select how to sort:</span>
-				<select id="sort_way" name="sort_way" class="form-control">
-					<option value="1">Ascending</option>
-					<option value="2">Descending</option>
-				</select>
-			</div>
-			<input class="btn btn-outline-secondary text-white" type="submit" name="submit" value="Sort">
-		</form>
-	</div>
-</div>
+<a href="profile.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to your profile</a><p></p>
 <?php
 if (!isset($_GET['page'])) {
 	$_GET['page'] = 1;
@@ -68,25 +29,8 @@ $current_page = $_GET['page'];
 $limit = $profiles_per_page;
 $skip = ( $current_page - 1 ) * $profiles_per_page;
 
-if (isset($_POST['submit'])) {
-	include ("sort.php");
-}
-if (isset($sort)) {
-	if (isset($search)) {
-		$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id WHERE `username`LIKE '".mysqli_real_escape_string($conn, $_POST['search_string'])."'%" . $sort;
-		
-	}else{
-		$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id" . $sort . "LIMIT $skip, $limit";
-	}
-} else{
-	if (isset($search)) {
-		$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id  WHERE `username`LIKE '".mysqli_real_escape_string($conn, $_POST['search_string'])."%'";
-	}else{
-		$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id LIMIT $skip, $limit";
-	}
-}
+$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id LIMIT $skip, $limit";
 
-// var_dump($query);
 $result = mysqli_query($conn, $query);
 
 if( mysqli_num_rows($result) > 0 ){
@@ -97,7 +41,7 @@ if( mysqli_num_rows($result) > 0 ){
 		</div>
 	</div>
 	<div class="row">
-		<table style="margin-left: 50px; background-color: #fff" class="table table-striped">
+		<table style="margin-left: 25px; background-color: #fff; max-width: 96%" class="table table-striped">
 			<tr>
 				<td>#</td>
 				<td>Name</td>
@@ -197,28 +141,17 @@ if( mysqli_num_rows($result) > 0 ){
 		  			}
 		  		}
 	  		}
-
-  		// 	while ($current_num <= $number_of_pages ){ 
-				// $active_class = '';
-				// if( $current_page == $current_num ){
-				// 	$active_class = 'active';
-				// }
-				?>
-	  			<!-- <li class="page-item <?= $active_class ?>"><a class="page-link" href="statistics.php?page=<?= $current_num ?>"><?= $current_num ?><span class="sr-only">(current)</span></a></li> -->
-	  			<?php// $current_num++; } ?>
-
-	  			<?php 
-	  			//  check this is not the last page
-	  			if( $current_page != $number_of_pages ){
-	  				//next link must lead to page + 1
-  					$next_num = $current_page + 1;
-	  			?>
-	    		<li class="page-item" class="next"><a class="page-link" href="statistics.php?page=<?= $next_num ?>">Newer <span aria-hidden="true">&rarr;</span></a></li>
-	    		<li class="page-item" class="next"><a class="page-link" href="statistics.php?page=<?= $number_of_pages ?>">Last <span aria-hidden="true">&rarr;</span></a></li>
-	    	<?php } ?>
-  		</ul>
-	</nav>
-	<?php
+  			//  check this is not the last page
+  			if( $current_page != $number_of_pages ){
+  				//next link must lead to page + 1
+					$next_num = $current_page + 1;
+  			?>
+    		<li class="page-item" class="next"><a class="page-link" href="statistics.php?page=<?= $next_num ?>">Newer <span aria-hidden="true">&rarr;</span></a></li>
+    		<li class="page-item" class="next"><a class="page-link" href="statistics.php?page=<?= $number_of_pages ?>">Last <span aria-hidden="true">&rarr;</span></a></li>
+    	<?php } ?>
+		</ul>
+</nav>
+<?php
 
 } else {
 	die('Query failed!' . mysqli_error($conn));

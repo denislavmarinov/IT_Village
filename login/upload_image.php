@@ -7,7 +7,23 @@ include '../includes/db_connect.php';
 if (!isset($_SESSION['loggedin'])) {
 	header("Location: login.php");
 }
+if (isset($_POST['submit'])) {
+	$query = "SELECT `user_image` FROM `users` WHERE `user_id` = '".$_SESSION['user_id']."' LIMIT 1";
 
+	$result = mysqli_query($conn, $query);
+
+	$file_name_arr = mysqli_fetch_assoc($result);
+	$file_name = $file_name_arr['user_image'];
+
+	$file = "../user_photos/".$_SESSION['username']."/" . $file_name;
+
+	if (file_exists($file)) {
+	    unlink($file);
+	} else {
+	  $_SESSION['user_errors'] = "Sorry! You can not update your image";
+	  header("Location: profile.php");
+	}
+}
 if(!empty( $_FILES )){ 
 
 	if( !empty( $_FILES['user_image'] ) ){

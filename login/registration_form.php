@@ -1,6 +1,11 @@
 <?php
 include '../includes/db_connect.php';
 include '../includes/header.php';
+if (isset($_SESSION['loggedin'])) {
+  if ($_SESSION['loggedin'] ==  true) {
+    header("Location: profile.php");
+  }
+}
 ?><!-- Registration form -->
 <div class="container">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
