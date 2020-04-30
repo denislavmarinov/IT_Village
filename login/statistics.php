@@ -197,7 +197,7 @@ $losses = mysqli_fetch_assoc($result);
 <?php 
 
 $games_played = (int)$wins['sum_wins'] + (int)$losses['sum_losses'];
-
+if ($games_played > 0) {
 //Find how percents is wins of all games played
 $win_percent = (int)$wins['sum_wins'] / $games_played;
 
@@ -227,4 +227,5 @@ $pie_chart_losses = $loss_percent * 424.17;
 	</div>
 </div>
 <?php
+}
 include('../includes/footer.php');

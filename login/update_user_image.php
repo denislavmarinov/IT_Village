@@ -16,7 +16,7 @@ if (!isset($_SESSION['loggedin'])) {
 				<div class="form-group">
 					<input type="file" name="user_image" class="form-control" style="width: 250px !important;">
 				</div>
-				<input class="btn btn-primary" id="registration_form" type="submit" name="submit" value="Update your profile image">
+				<input class="btn btn-primary" id="registration_form" type="submit" name="update_image" value="Update your profile image">
 			</form>
 		</div>
 	</nav>

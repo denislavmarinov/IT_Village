@@ -28,6 +28,7 @@ if (!file_exists($file)) {
 
 	if ($result) {
 		header("Location: profile.php");
+		$_SESSION['user_errors'] = false;
 	}else{
 		$_SESSION['user_errors'] = "Error occurs! Please try again later!";
 		header("Location: profile.php");

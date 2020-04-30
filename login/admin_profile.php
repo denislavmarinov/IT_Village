@@ -12,6 +12,6 @@ if (!isset($_SESSION['profile_key'])) {
 	<a href="change_role.php" class="btn btn-outline-info">Change user role</a>
 	<a href="roles.php" class="btn btn-outline-info">Roles</a>
 	<a href="change_password.php" class="btn btn-outline-info">Change password</a>
-	<a href="logout.php" class="btn btn-outline-info">Log out</a>
+	<a href="logout.php" class="btn btn-outline-info"><i class="fas fa-sign-out-alt"></i>Log out</a>
   </div>
 </div>

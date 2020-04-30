@@ -58,12 +58,12 @@ if ($have_image_arr == "YES") {
 if (isset($_SESSION['user_errors'])) {
 	if ($_SESSION['user_errors'] != false) {
 		?>
-		<p class="alert alert-danger" style="font-size: 25px; float: right;"><?= $_SESSION['user_errors'] ?></p>
+		<p class="alert alert-danger" style="float: right;"><?= $_SESSION['user_errors'] ?></p>
 		<?php
 		unset($_SESSION['user_errors']);
 	}else{
 		?>
-		<p class="alert alert-success">Sucessful profile image action</p>
+		<p class="alert alert-success" style="float: right;">Sucessful profile image action</p>
 		<?php
 		unset($_SESSION['user_errors']);
 	}

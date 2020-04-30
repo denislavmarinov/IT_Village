@@ -7,7 +7,7 @@ include '../includes/db_connect.php';
 if (!isset($_SESSION['loggedin'])) {
 	header("Location: login.php");
 }
-if (isset($_POST['submit'])) {
+if (isset($_POST['update_image'])) {
 	$query = "SELECT `user_image` FROM `users` WHERE `user_id` = '".$_SESSION['user_id']."' LIMIT 1";
 
 	$result = mysqli_query($conn, $query);
@@ -33,8 +33,9 @@ if(!empty( $_FILES )){
 		}
 
 		if ($_FILES['user_image']['size'] > 4000000) { 
-       		die('upload file up to 4Mb');
-   		 } 
+			$_SESSION['user_errors'] = "The file is too big!!!";
+       		header("Location: profile.php");
+   		 }
 
 		//save file to desired folder
 		//the upload dir must exist - created before first upload
