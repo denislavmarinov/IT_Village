@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 include '../includes/header.php';
 include '../includes/db_connect.php';
@@ -29,16 +29,31 @@ $query = "SELECT `role_id`, `role_name`, `role_description` FROM `roles` WHERE `
 
 $result = mysqli_query($conn, $query);
 ?>
-<a href="profile.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to your profile</a>
-<a class="btn btn-outline-info" href="add_role.php">Add role</a>
-<a class="btn btn-outline-danger" href="delete_role.php">Delete role</a>
+<a href="roles.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to roles</a>
 
 <p></p>
+<?php 	if (isset($_SESSION['user_error'])) { ?>
+<p class="alert alert-danger">
+	<?php 
+		echo $_SESSION['user_error'];
+		unset($_SESSION['user_error']);
+	?>
+</p>
+<?php } ?>
+<?php if(isset($_SESSION['role_delete_successful'])){ ?>
+<p class="alert alert-success">
+	<?php 
+		echo $_SESSION['role_delete_successful'];
+		unset($_SESSION['role_delete_successful']);
+	?>
+</p>
+<?php } ?>
 <table class='table table-striped' style="color: #fff">
 	<tr>
 		<td>#</td>
 		<td>Role</td>
 		<td>Role description</td>
+		<td>#</td>
 		<td>#</td>
 	</tr>
 <?php
@@ -60,21 +75,23 @@ while ($row = mysqli_fetch_assoc($result)) {
 				}
 			?>
 		</td>
+		<td>
+			<?php 
+			if ($row['role_name'] == "admin" || $row['role_name'] == "user") {
+				echo 'You may not delete this role';
+			}else{
+			?>
+			<form action="delete_role_script.php" method="post">
+				<input class="btn btn-outline-danger" type="submit" name="submit" value="Delete role">
+				<input type="hidden" name="role_id" value="<?= $row['role_id'] ?>">
+			</form>
+		<?php } ?>
+		</td>
 	</tr>
     <?php
     $num++;
 }
 ?>
-<tr>
-	<td colspan="3">Sum of the users</td>
-	<?php 
-	$sum = 0;
-	for ($i = 1; $i <= count($roles_sum); $i++) {
-		$sum += $roles_sum[$i];
-	}
-	?>
-	<td><?= $sum ?></td>
-</tr>
 </table>
 
 <?php
