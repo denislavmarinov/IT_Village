@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2020 at 05:15 PM
+-- Generation Time: May 01, 2020 at 01:54 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -25,49 +25,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `game_room`
---
-
-CREATE TABLE `game_room` (
-  `room_id` int(11) NOT NULL,
-  `player1` int(11) NOT NULL,
-  `player2` int(11) NOT NULL,
-  `player3` int(11) NOT NULL,
-  `player4` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `music`
---
-
-CREATE TABLE `music` (
-  `music_id` int(11) NOT NULL,
-  `music_name` varchar(150) NOT NULL,
-  `added_by` int(11) NOT NULL,
-  `date_deleted` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `passwords`
 --
 
 CREATE TABLE `passwords` (
   `password_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `passwords`
---
-
-INSERT INTO `passwords` (`password_id`, `user_id`, `password`) VALUES
-(1, 5, '123456'),
-(2, 6, '123456');
 
 -- --------------------------------------------------------
 
@@ -78,20 +43,9 @@ INSERT INTO `passwords` (`password_id`, `user_id`, `password`) VALUES
 CREATE TABLE `results` (
   `result_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `wins` int(4) DEFAULT NULL,
-  `losses` int(4) DEFAULT NULL
+  `wins` int(11) NOT NULL DEFAULT 0,
+  `losses` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `results`
---
-
-INSERT INTO `results` (`result_id`, `user_id`, `wins`, `losses`) VALUES
-(1, 5, 10, 3),
-(2, 6, 4, 19),
-(3, 7, 10, 19),
-(4, 8, 19, 3),
-(5, 9, 30, 12);
 
 -- --------------------------------------------------------
 
@@ -111,8 +65,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`role_id`, `role_name`, `role_description`, `date_deleted`) VALUES
-(1, 'admin', 'Full roghts', NULL),
-(2, 'user', 'Custom rights', NULL);
+(1, 'admin', 'Full rights', NULL),
+(2, 'user', 'Only can play games, and view the statistics', NULL);
 
 -- --------------------------------------------------------
 
@@ -124,43 +78,15 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(60) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `user_image` varchar(255) DEFAULT NULL,
   `role_id` int(11) NOT NULL,
   `date_registered` date NOT NULL,
   `date_deleted` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `username`, `email`, `role_id`, `date_registered`, `date_deleted`) VALUES
-(5, 'admin', 'admin@example.com', 1, '2020-04-13', NULL),
-(6, 'root', 'root@example.com', 2, '2020-04-13', NULL),
-(7, 'test', 'test@example.com', 2, '2020-04-15', NULL),
-(8, 'test1', 'test1@example.com', 2, '2020-04-15', NULL),
-(9, 'test2', 'test2@example.com', 2, '2020-04-15', NULL);
-
---
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `game_room`
---
-ALTER TABLE `game_room`
-  ADD PRIMARY KEY (`room_id`),
-  ADD KEY `player1` (`player1`),
-  ADD KEY `player2` (`player2`),
-  ADD KEY `player3` (`player3`),
-  ADD KEY `player4` (`player4`);
-
---
--- Indexes for table `music`
---
-ALTER TABLE `music`
-  ADD PRIMARY KEY (`music_id`),
-  ADD UNIQUE KEY `music_name` (`music_name`),
-  ADD KEY `added_by` (`added_by`);
 
 --
 -- Indexes for table `passwords`
@@ -189,6 +115,7 @@ ALTER TABLE `roles`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `user_name` (`username`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `role_id` (`role_id`);
 
 --
@@ -196,59 +123,32 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `game_room`
---
-ALTER TABLE `game_room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `music`
---
-ALTER TABLE `music`
-  MODIFY `music_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `passwords`
 --
 ALTER TABLE `passwords`
-  MODIFY `password_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `password_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `game_room`
---
-ALTER TABLE `game_room`
-  ADD CONSTRAINT `game_room_ibfk_1` FOREIGN KEY (`player1`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `game_room_ibfk_2` FOREIGN KEY (`player2`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `game_room_ibfk_3` FOREIGN KEY (`player3`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `game_room_ibfk_4` FOREIGN KEY (`player4`) REFERENCES `users` (`user_id`);
-
---
--- Constraints for table `music`
---
-ALTER TABLE `music`
-  ADD CONSTRAINT `music_ibfk_1` FOREIGN KEY (`added_by`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `passwords`
