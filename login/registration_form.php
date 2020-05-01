@@ -49,17 +49,17 @@ if( isset($_POST ['submit'])){
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
         $error = false;
-        if($_POST['pswd'] == $_POST['rep_pswd']){
-            $password = filter_var($_POST['pswd'], FILTER_SANITIZE_STRING);
-            $error = false;
-        }else {
-            $error = true;
-            $_SESSION['user_errors'] = "Passwords doen't match!!!";
-            exit(header("Loaction: registration_form.php"));
-        }
     } else {
         $error = true;
         $_SESSION['user_errors'] = "Please fill all fields!!!";
+        exit(header("Location: registration_form.php"));
+    }
+    if($_POST['pswd'] == $_POST['rep_pswd']){
+        $password = filter_var($_POST['pswd'], FILTER_SANITIZE_STRING);
+        $error = false;
+    }else {
+        $error = true;
+        $_SESSION['user_errors'] = "Passwords doen't match!!!";
         exit(header("Location: registration_form.php"));
     }
        // Check if email already exists in DB 
