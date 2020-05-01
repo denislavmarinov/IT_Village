@@ -22,63 +22,6 @@ session_start();
   <!-- Font Awesome 5 -->
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <link rel="stylesheet" type="text/css" href="../style/inner_style.css">
-      <style>
-        .row{
-          margin: 0px !important;
-        }
-        body {
-          margin: 10px;
-          background: #7112DB;
-          background-image: linear-gradient(-60deg, #983DDF, #7112DB, #340F70);
-        }
-        h3 {
-          font-family: Monospac821 BT;
-          color: #340F70; 
-          text-shadow: 2px 1px 1px #FFFFFF;
-        }
-        h4 {
-          font-family: Monospac821 BT;
-         }
-        p {
-          font-family: Helvetica;
-          text-indent: 50px;
-        }
-        #login {
-          background: #983DDF;
-        }       
-
-        #registration_form {
-          background: #340F70;
-        }
-        #nav {
-          background: linear-gradient(65deg, #983DDF, #7112DB, #340F70);
-          border: solid 1px #FFFFFF;
-        }
-        #img {
-          border: solid 1px #FFFFFF;
-        } 
-        #index_content{
-            font-family: 'Sofia';
-            background: linear-gradient(65deg, #983DDF, #7112DB, #340F70);
-          border: solid 1px #FFFFFF;
-        }
-        #img_first_page{
-            border: solid 1px #FFFFFF;
-            float: right; 
-        }
-        img:hover {
-            transform: scaleX(-1);
-        }
-        .span {
-            writing-mode: vertical-rl;
-        }
-        .relative {
-            position: relative;
-            left: 200px;
-        }
-        .error {
-          text-align: center; font-size: 100% ;
-        }    
-</style>
+  <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 <body>
