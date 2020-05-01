@@ -29,7 +29,7 @@ $current_page = $_GET['page'];
 $limit = $profiles_per_page;
 $skip = ( $current_page - 1 ) * $profiles_per_page;
 
-$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id LIMIT $skip, $limit";
+$query = "SELECT u.`username`, res.`wins`, res.`losses` FROM users u JOIN results res ON u.user_id = res.user_id ORDER BY res.`wins` DESC LIMIT $skip, $limit";
 
 $result = mysqli_query($conn, $query);
 
