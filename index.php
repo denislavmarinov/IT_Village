@@ -17,14 +17,22 @@
       </div>
    
         <section id="index_content" class="p-3 my-3 bg-dark text-white">
-            <h3><strong>Добре дошли в <span class="span">любимата</span>  бордова игра за програмисти</strong></h3>
+            <h3><strong>Welcome to the favorite developer board game</strong></h3>
             <div style="column-count: 1;">
             <img style="width:52%;" src="img/picture_background.jpg" class="img-responsive rounded-circle" id="img_first_page" alt="background" id="img"> 
-                <p>Всяка петък вечер група от супер-cool програмисти се събират за да играят любимата си бордова игра - &bdquo;IT Village&rdquo;. Те толкова са уморени от кодиране през седмицата, че непрекъснато забравят правилата на програмата. Също така им е много трудно да работят с хартия и да хвърлят зарчета и взимат едно много важно решение - играта трябва да бъда развита и превърната в компютърна игра.
-                Всеизвестен факт е, че програмиститите са мързеливи хора. Започнали да програмират новата игра, но спряли.</p> 
-                <p><b>Задачата е:</b></p>
-                <p>Да се създаде уеб-приложение &bdquo;IT-Village&rdquo;, в което играят само регистрирани потребители, след вход с проверка на потребителско име и парола. Има дъска за игра 4х4. Играта се развива само върху първата и последната колона и първия и последен ред на дъската. Всички останали полета са празни и не може да се играе върху тях.         
-                Играта се стартира от входната позиция или от едно, от полетата за игра и хвърляте зарчето. Ходовете се изпъляват по посока на часовниковата стрелка.</p>
+                <p>Every Friday night a group of super-cool programmers gather to play their favorite boarding game- &bdquo; IT Village &rdquo;. They are so tired of coding during the week that they continually forget the rules of the program. It is also very difficult to work with paper and throw dice and take a very important decision-the game should be developed and turned into a computer game.
+                It is a well-known fact that the programstites are lazy people. They started programming the new game, but stopped.</p> 
+                <p><b>Rules:</b></p>
+                <p>Each game player starts with 50 coins. The game is over when you finish the coins, buy all the motels, no more moves or step N field.</p>
+                <p><b>Fields:</b></p>
+                <ul>
+                	<li><span style=" color: #340F70; ">P</span>  -  WI-FI - bar ( loss 5 coins)</li>
+                	<li><span style=" color: #340F70; ">I</span>  -  WI-FI - motel</li>
+                	<li><span style=" color: #340F70; ">F</span>  -  Freelance project ( win 20 coins)</li>
+                	<li><span style=" color: #340F70; ">S</span>  -  Storm ( loss 2 turns)</li>
+                	<li><span style=" color: #340F70; ">V</span>  -  Super PHP ( multiply your coins by 10)</li>
+                	<li><span style=" color: #340F70; ">N</span>  -  VratsaSoftwareSchool (Automaticaly win the game)</li>
+                </ul>
           </div>
         </section>
     </main>
