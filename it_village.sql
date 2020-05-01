@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2020 at 01:54 PM
+-- Generation Time: May 01, 2020 at 02:34 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -34,6 +34,13 @@ CREATE TABLE `passwords` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `passwords`
+--
+
+INSERT INTO `passwords` (`password_id`, `user_id`, `password`) VALUES
+(1, 1, '0468052726cc1deccd093433f843b7c9');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,13 @@ CREATE TABLE `results` (
   `wins` int(11) NOT NULL DEFAULT 0,
   `losses` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`result_id`, `user_id`, `wins`, `losses`) VALUES
+(1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -83,6 +97,13 @@ CREATE TABLE `users` (
   `date_registered` date NOT NULL,
   `date_deleted` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `user_image`, `role_id`, `date_registered`, `date_deleted`) VALUES
+(1, 'Admin', 'admin@example.com', NULL, 1, '2020-05-01', NULL);
 
 --
 -- Indexes for dumped tables
@@ -126,13 +147,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `passwords`
 --
 ALTER TABLE `passwords`
-  MODIFY `password_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `password_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -144,7 +165,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
