@@ -131,21 +131,21 @@ include ("functions/functions.php");
 	</div>
 	<div>
 		<form action="game_script.php" method="post" id="dice">
-			<input type="submit" name="dice_row" value="Хвърли зар">
+			<input class="btn btn-danger" type="submit" name="dice_row" value="Хвърли зар" id="registration_form">
 		</form>
 		<div class="row">
 			<div id="dice_image" class="col-md-4 offset-md-4">
 				<?php if (isset($_SESSION['dice'])) { ?>
-				<p>Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="<?=$_SESSION['dice']?>"></p>
+				<p class="text-white">Your dice is:   <img style="width: 50px; height: 50px;" src="img/dice_<?=$_SESSION['dice']?>.jpg" alt="<?=$_SESSION['dice']?>"></p>
 				<?php } ?>
 			</div>
 
 			<div id="game_stats" class="col-md-4 offset-md-8">
 				<p>Game message:</p>
 				<p class="alert alert-info"><?= $_SESSION['message'] ?></p>
-				<p>You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
-				<p>Your money:  <b><?= $_SESSION['money'] ?></b></p>
-				<p>Property buy: <b><?php echo count($_SESSION['property_buy']) ?></b></p>
+				<p class="text-white">You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
+				<p class="text-white">Your money:  <b><?= $_SESSION['money'] ?></b></p>
+				<p class="text-white">Property buy: <b><?php echo count($_SESSION['property_buy']) ?></b></p>
 			</div>
 		</div>
 	</div>
