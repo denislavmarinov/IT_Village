@@ -41,3 +41,8 @@ ErrorDocument 505 /Vratsa_Software_School/Module_2/Project/IT_Village/error_mess
 ErrorDocument 506 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
 ErrorDocument 507 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
 ErrorDocument 510 /Vratsa_Software_School/Module_2/Project/IT_Village/error_messages/error.php
+
+
+php_flag display_startup_errors off
+php_flag display_errors off
+php_value error_log D:/xampp/htdocs/Vratsa_Software_School/Module_2/Project/IT_Village/error_log/error.log

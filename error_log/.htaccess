@@ -1,6 +1,6 @@
 Options +Indexes
 
 AuthType basic
-AuthName "prompt"
+AuthName "This is private! Authorize you before accesssing it~!"
 AuthUserFile ../htdocs/Vratsa_Software_School/Module_2/Project/IT_Village/.htpasswd
 Require valid-user
