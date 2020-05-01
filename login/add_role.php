@@ -10,7 +10,7 @@ if ($_SESSION['role'] != 'admin') {
 }
 
 ?>
-
+<a href="profile.php" class="btn btn-outline-light"><i class="fas fa-reply-all"></i>   Go back to your profile</a><p></p>
 <form class="form-group" action="add_role_script.php" method="post">
 	<label for="role_name" class="text-light">Role name:</label>
 	<input type="text" name="role_name" placeholder="admin" class="form-control" id="role_name">
