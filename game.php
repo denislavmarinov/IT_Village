@@ -129,7 +129,7 @@ include ("functions/functions.php");
 			</svg>
 		</div>
 	</div>
-	<div>
+	<div class="container">	
 		<form action="game_script.php" method="post" id="dice">
 			<input class="btn btn-success" id="login" type="submit" name="dice_row" value="Хвърли зар">
 		</form>
