@@ -20,7 +20,7 @@ if (isset($_SESSION['loggedin'])) {
     ?>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="nav">
         <a class="navbar-brand" href="../index.php">
-        <img id="img" src="../img/logo_1.jpg" alt="logo" style="width: 150px;"><p>Home</p></a>
+        <img id="img" src="../img/logo_1.jpg" alt="logo" style="width: 150px;"></a>
         <div class="container">
             <h4 class="text-warning">JOIN to g@me IT Vill@ge</h4>
             <form action="#" method="post">
