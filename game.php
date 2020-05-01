@@ -141,7 +141,7 @@ include ("functions/functions.php");
 			</div>
 
 			<div id="game_stats" class="col-md-4 offset-md-8">
-				<p>Game message:</p>
+				<p class="text-white">Game message:</p>
 				<p class="alert alert-info"><?= $_SESSION['message'] ?></p>
 				<p class="text-white">You have only <b><?= $_SESSION['moves'] ?></b> more. </p>
 				<p class="text-white">Your money:  <b><?= $_SESSION['money'] ?></b></p>
