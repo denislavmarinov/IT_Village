@@ -79,8 +79,8 @@ if ($_SESSION['score'] == "win" || $_SESSION['score'] == "loss") {
 	}
 	$result = mysqli_query($conn, $query);
 	?>
-	<a href="login/profile.php" class="btn btn-outline-secondary">Go back to profile</a>
-	<a href="functions/game_start.php" class="btn btn-outline-secondary">Play again</a>
+	<a href="login/profile.php" class="btn btn-primary" id="login">Go back to profile</a>
+	<a href="functions/game_start.php" class="btn btn-primary" id="registration_form">Play again</a>
 	<?php
 
 }
@@ -131,7 +131,7 @@ include ("functions/functions.php");
 	</div>
 	<div>
 		<form action="game_script.php" method="post" id="dice">
-			<input class="btn btn-danger" type="submit" name="dice_row" value="Хвърли зар" id="registration_form">
+			<input class="btn btn-success" id="login" type="submit" name="dice_row" value="Хвърли зар">
 		</form>
 		<div class="row">
 			<div id="dice_image" class="col-md-4 offset-md-4">
